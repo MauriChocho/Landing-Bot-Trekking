@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bariloche Trekking | Senderos en Bariloche</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#1a1a18;--bark:#2c2416;--moss:#3d5a3e;--sage:#6b8f71;
+  --glacier:#c8ddd1;--snow:#f2f0ec;--gold:#c4a35a;--amber:#e8c97a;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Barlow',sans-serif;background:var(--stone);color:var(--snow);overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:100;padding:1.1rem 3rem;display:flex;justify-content:space-between;align-items:center;transition:background .4s;backdrop-filter:blur(8px);}
+nav.scrolled{background:rgba(10,14,11,.97);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--amber);letter-spacing:.04em;text-decoration:none;}
+.nav-logo span{color:var(--glacier);font-weight:400;}
+nav ul{list-style:none;display:flex;gap:2.5rem;}
+nav a{color:var(--glacier);text-decoration:none;font-family:'Barlow Condensed',sans-serif;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;opacity:.75;transition:opacity .2s,color .2s;}
+nav a:hover{opacity:1;color:var(--amber);}
+.nav-reg{color:var(--amber)!important;opacity:1!important;}
+
+/* HERO - fotorrealista */
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.hero-photo{
+  position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1920&q=90&auto=format&fit=crop') center 30%/cover no-repeat;
+  transform:scale(1.06);
+  animation:hZoom 25s ease-in-out infinite alternate;
+}
+@keyframes hZoom{from{transform:scale(1.06) translateY(0)}to{transform:scale(1.0) translateY(-1%)}}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(4,9,6,.6) 0%,rgba(6,12,8,.25) 35%,rgba(4,9,6,.65) 70%,rgba(8,13,10,.98) 100%);}
+.hero-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 35%,rgba(0,0,0,.55) 100%);}
+/* subtle color grade - warm shadows */
+.hero-grade{position:absolute;inset:0;background:linear-gradient(to top,rgba(44,36,22,.4) 0%,transparent 40%);}
+
+.hero-content{position:relative;z-index:2;text-align:center;padding:2rem;max-width:920px;}
+.hero-eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:.76rem;letter-spacing:.35em;text-transform:uppercase;color:var(--amber);margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s .3s forwards;text-shadow:0 2px 12px rgba(0,0,0,.7);}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(4rem,9.5vw,9rem);line-height:.9;font-weight:900;color:var(--snow);margin-bottom:1.6rem;opacity:0;animation:fadeUp .9s .5s forwards;text-shadow:0 6px 40px rgba(0,0,0,.55);}
+.hero h1 em{font-style:italic;color:var(--amber);display:block;}
+.hero-desc{font-size:1.05rem;font-weight:300;color:var(--glacier);max-width:550px;margin:0 auto 2.5rem;line-height:1.8;opacity:0;animation:fadeUp .9s .7s forwards;text-shadow:0 2px 16px rgba(0,0,0,.65);}
+.hero-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .9s .9s forwards;}
+
+/* hero bottom strip */
+.hero-strip{position:absolute;bottom:0;left:0;right:0;z-index:3;display:flex;justify-content:center;gap:0;background:rgba(6,10,8,.8);backdrop-filter:blur(10px);border-top:1px solid rgba(196,163,90,.12);}
+.strip-item{display:flex;align-items:center;gap:.7rem;padding:1rem 2.5rem;border-right:1px solid rgba(200,221,209,.06);}
+.strip-item:last-child{border-right:none;}
+.strip-icon{font-size:1.2rem;}
+.strip-txt{font-family:'Barlow Condensed',sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);line-height:1.4;}
+.strip-txt strong{color:var(--glacier);display:block;font-size:.88rem;}
+
+/* BUTTONS */
+.btn-p{background:var(--gold);color:var(--stone);padding:.85rem 2.2rem;font-family:'Barlow Condensed',sans-serif;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:background .2s,transform .15s;display:inline-block;}
+.btn-p:hover{background:var(--amber);transform:translateY(-2px);}
+.btn-s{background:transparent;color:var(--glacier);padding:.85rem 2.2rem;font-family:'Barlow Condensed',sans-serif;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;text-decoration:none;border:1px solid rgba(200,221,209,.32);cursor:pointer;transition:all .2s;display:inline-block;}
+.btn-s:hover{border-color:var(--amber);color:var(--amber);transform:translateY(-2px);}
+
+/* INTRO */
+.s-intro{background:var(--bark);padding:7rem 3rem;position:relative;overflow:hidden;}
+.s-intro::before{content:'NAHUEL HUAPI';position:absolute;right:-1.5rem;top:50%;transform:translateY(-50%) rotate(90deg);font-family:'Playfair Display',serif;font-size:8rem;font-weight:900;color:rgba(196,163,90,.03);white-space:nowrap;pointer-events:none;}
+.intro-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+.lbl{font-family:'Barlow Condensed',sans-serif;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:1.1rem;display:block;}
+.h2-serif{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.1rem);line-height:1.1;color:var(--snow);margin-bottom:1.6rem;}
+.h2-serif em{font-style:italic;color:var(--amber);}
+.body-txt{color:var(--glacier);font-weight:300;line-height:1.8;font-size:.97rem;margin-bottom:1.1rem;}
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem;padding-top:3rem;border-top:1px solid rgba(196,163,90,.18);}
+.kpi-val{font-family:'Playfair Display',serif;font-size:2.8rem;color:var(--amber);display:block;line-height:1;margin-bottom:.3rem;}
+.kpi-lbl{font-family:'Barlow Condensed',sans-serif;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--sage);}
+.info-card{background:linear-gradient(135deg,rgba(61,90,62,.28),rgba(20,26,22,.6));border:1px solid rgba(196,163,90,.14);padding:2.4rem;position:relative;}
+.info-card::before{content:'';position:absolute;top:-7px;left:-7px;right:7px;bottom:7px;border:1px solid rgba(196,163,90,.08);pointer-events:none;}
+.emerg-box{background:rgba(139,69,19,.1);border:1px solid rgba(139,69,19,.32);border-left:3px solid var(--gold);padding:1.4rem;margin-top:2rem;}
+.emerg-box h4{font-family:'Barlow Condensed',sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:.9rem;}
+.emerg-box p{font-size:.85rem;color:var(--glacier);line-height:1.6;margin-bottom:.35rem;}
+.emerg-box strong{color:var(--snow);}
+
+/* SECTION COMMON */
+.s-hdr{text-align:center;max-width:680px;margin:0 auto 5rem;}
+.s-lbl{font-family:'Barlow Condensed',sans-serif;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem;display:block;}
+.s-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);line-height:1.1;color:var(--snow);margin-bottom:1.1rem;}
+.s-sub{color:var(--sage);font-weight:300;line-height:1.7;font-size:.93rem;}
+
+/* ACTIVITIES */
+.s-act{background:var(--stone);padding:7rem 3rem;}
+.act-tabs{display:flex;justify-content:center;gap:.5rem;margin-bottom:3.5rem;flex-wrap:wrap;}
+.tab-btn{font-family:'Barlow Condensed',sans-serif;font-size:.76rem;letter-spacing:.15em;text-transform:uppercase;padding:.7rem 1.8rem;background:transparent;border:1px solid rgba(200,221,209,.11);color:var(--sage);cursor:pointer;transition:all .2s;}
+.tab-btn.active,.tab-btn:hover{background:var(--moss);border-color:var(--moss);color:var(--snow);}
+
+.diff-sec{max-width:1300px;margin:0 auto;}
+.diff-tabs{display:flex;gap:0;margin-bottom:2.5rem;border-bottom:1px solid rgba(200,221,209,.09);flex-wrap:wrap;}
+.dtab{font-family:'Barlow Condensed',sans-serif;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;padding:.8rem 1.4rem;background:transparent;border:none;cursor:pointer;color:var(--sage);border-bottom:2px solid transparent;transition:all .2s;margin-bottom:-1px;}
+.dtab.active{color:var(--snow);border-bottom-color:var(--amber);}
+.dtab:hover{color:var(--glacier);}
+.dtab .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:.4rem;}
+.d-baja{background:#5cb85c;}.d-media{background:#f0ad4e;}.d-alta{background:#e8872a;}.d-muyalta{background:#d9534f;}.d-extrema{background:#8b008b;}
+.dcontent{display:none;}
+.dcontent.active{display:block;}
+
+.diff-hdr{background:linear-gradient(135deg,rgba(61,90,62,.2),rgba(20,26,22,.5));border:1px solid rgba(196,163,90,.1);border-left:4px solid var(--gold);padding:1.7rem 2.2rem;margin-bottom:2rem;}
+.diff-hdr h3{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--snow);margin-bottom:.45rem;}
+.diff-hdr p{color:var(--glacier);font-weight:300;line-height:1.6;font-size:.9rem;}
+.badge{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;padding:.28rem .85rem;border-radius:2px;margin-bottom:.7rem;font-weight:700;}
+.bg-baja{background:rgba(92,184,92,.16);color:#7dd87d;border:1px solid rgba(92,184,92,.26);}
+.bg-media{background:rgba(240,173,78,.13);color:#f5c261;border:1px solid rgba(240,173,78,.26);}
+.bg-alta{background:rgba(232,135,42,.13);color:#f0a06a;border:1px solid rgba(232,135,42,.26);}
+.bg-muyalta{background:rgba(217,83,79,.13);color:#e88080;border:1px solid rgba(217,83,79,.26);}
+.bg-extrema{background:rgba(139,0,139,.13);color:#cc66cc;border:1px solid rgba(139,0,139,.26);}
+
+/* SENDERO CARD */
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(370px,1fr));gap:1.8rem;}
+.scard{background:rgba(18,26,20,.8);border:1px solid rgba(200,221,209,.07);overflow:hidden;transition:border-color .25s,transform .25s,box-shadow .25s;}
+.scard:hover{border-color:rgba(196,163,90,.32);transform:translateY(-4px);box-shadow:0 22px 55px rgba(0,0,0,.38);}
+
+/* mini map */
+.smap{height:158px;background:rgba(10,15,12,.95);border-bottom:1px solid rgba(200,221,209,.055);position:relative;overflow:hidden;}
+.smap svg{position:absolute;inset:0;width:100%;height:100%;}
+.topo{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 20px,rgba(107,143,113,.04) 20px,rgba(107,143,113,.04) 21px);}
+.mlbl{position:absolute;bottom:6px;font-family:'Barlow Condensed',sans-serif;font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;color:rgba(200,221,209,.5);background:rgba(8,12,10,.82);padding:.18rem .52rem;}
+.mlbl.s{left:6px;}.mlbl.e{right:6px;}
+/* coords overlay */
+.mcoords{position:absolute;top:7px;right:7px;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.06em;color:rgba(200,221,209,.3);background:rgba(8,12,10,.7);padding:.15rem .45rem;}
+
+.sbody{padding:1.3rem 1.5rem 1.5rem;}
+.sbody h4{font-family:'Barlow Condensed',sans-serif;font-size:.98rem;font-weight:700;letter-spacing:.04em;color:var(--snow);margin-bottom:.9rem;line-height:1.3;}
+.sstats{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-bottom:.95rem;padding-bottom:.95rem;border-bottom:1px solid rgba(200,221,209,.055);}
+.sv{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--amber);display:block;line-height:1;}
+.sl{font-family:'Barlow Condensed',sans-serif;font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);margin-top:.2rem;display:block;}
+.stags{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.75rem;}
+.stag{font-family:'Barlow Condensed',sans-serif;font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;padding:.18rem .58rem;border:1px solid rgba(200,221,209,.1);color:var(--sage);}
+.sdesc{font-size:.81rem;color:rgba(200,221,209,.58);font-weight:300;line-height:1.6;}
+
+/* TRAVESIAS */
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:2rem;max-width:1300px;margin:0 auto;}
+.tcard{background:linear-gradient(155deg,rgba(61,90,62,.16),rgba(18,26,20,.8));border:1px solid rgba(196,163,90,.12);overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s;}
+.tcard:hover{transform:translateY(-5px);border-color:rgba(196,163,90,.36);box-shadow:0 28px 65px rgba(0,0,0,.42);}
+.tmap{height:172px;background:rgba(8,12,10,.95);border-bottom:1px solid rgba(196,163,90,.07);position:relative;overflow:hidden;}
+.tmap svg{position:absolute;inset:0;width:100%;height:100%;}
+.tbody{padding:1.6rem 2rem 2rem;position:relative;}
+.tnum{font-family:'Playfair Display',serif;font-size:4.5rem;font-weight:900;color:rgba(196,163,90,.07);position:absolute;top:-.4rem;right:.9rem;line-height:1;pointer-events:none;}
+.tbody h3{font-family:'Playfair Display',serif;font-size:1.18rem;color:var(--snow);margin-bottom:.75rem;}
+.tbody p{color:var(--glacier);font-weight:300;line-height:1.7;font-size:.87rem;margin-bottom:1.1rem;}
+.tstats{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-bottom:.85rem;padding-bottom:.85rem;border-bottom:1px solid rgba(200,221,209,.055);}
+.tpill{font-family:'Barlow Condensed',sans-serif;font-size:.64rem;letter-spacing:.07em;text-transform:uppercase;padding:.22rem .72rem;background:rgba(74,120,86,.16);border:1px solid rgba(74,120,86,.26);color:var(--sage);}
+.tpills{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.5rem;}
+
+/* RECOMENDACIONES */
+.s-reco{background:var(--bark);padding:7rem 3rem;position:relative;overflow:hidden;}
+.s-reco::after{content:'';position:absolute;top:0;right:0;width:40%;height:100%;background:radial-gradient(ellipse at top right,rgba(74,120,86,.09),transparent 70%);pointer-events:none;}
+.reco-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+.reco-steps{display:flex;flex-direction:column;}
+.rstep{display:grid;grid-template-columns:52px 1fr;gap:1.3rem;align-items:start;padding:1.5rem 0;border-bottom:1px solid rgba(200,221,209,.055);}
+.rstep:first-child{padding-top:0;}
+.rnum{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:rgba(196,163,90,.2);line-height:1;text-align:right;}
+.rbody h4{font-family:'Barlow Condensed',sans-serif;font-size:.86rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--snow);margin-bottom:.45rem;}
+.rbody p{color:var(--sage);font-weight:300;font-size:.86rem;line-height:1.6;}
+.reco-vis{position:sticky;top:7rem;}
+.rbox{background:linear-gradient(145deg,rgba(61,90,62,.26),rgba(20,26,22,.55));border:1px solid rgba(196,163,90,.16);padding:2.4rem;margin-bottom:1.5rem;}
+.rbox h3{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--snow);margin-bottom:.9rem;}
+.rbox p{color:var(--glacier);font-weight:300;line-height:1.8;font-size:.88rem;margin-bottom:.9rem;}
+.rbox ul{list-style:none;margin-top:.9rem;}
+.rbox li{color:var(--sage);font-size:.85rem;padding:.35rem 0;border-bottom:1px solid rgba(200,221,209,.045);display:flex;align-items:start;gap:.65rem;}
+.rbox li::before{content:'—';color:var(--gold);flex-shrink:0;}
+
+/* CHATBOT */
+.s-chat{background:var(--stone);padding:7rem 3rem;}
+.chat-wrap{max-width:900px;margin:0 auto;}
+.chat-ui{background:rgba(12,18,14,.88);border:1px solid rgba(196,163,90,.17);overflow:hidden;box-shadow:0 45px 90px rgba(0,0,0,.48);}
+.chat-hdr{background:linear-gradient(135deg,var(--moss),rgba(58,86,59,.85));padding:1.15rem 1.8rem;display:flex;align-items:center;gap:1rem;border-bottom:1px solid rgba(196,163,90,.1);}
+.chat-av{width:38px;height:38px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.chat-inf h4{font-family:'Barlow Condensed',sans-serif;font-size:.86rem;font-weight:700;letter-spacing:.08em;color:var(--snow);}
+.chat-inf p{font-size:.7rem;color:var(--sage);display:flex;align-items:center;gap:.4rem;}
+.odot{width:7px;height:7px;background:#5cb85c;border-radius:50%;animation:pulse 2s infinite;}
+.msgs{height:420px;overflow-y:auto;padding:1.8rem;display:flex;flex-direction:column;gap:1.2rem;scroll-behavior:smooth;}
+.msgs::-webkit-scrollbar{width:3px;}
+.msgs::-webkit-scrollbar-thumb{background:rgba(196,163,90,.17);border-radius:2px;}
+.msg{display:flex;gap:.8rem;animation:fadeUp .3s both;}
+.msg.u{flex-direction:row-reverse;}
+.mav{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;align-self:flex-end;}
+.msg.b .mav{background:var(--moss);}
+.msg.u .mav{background:rgba(196,163,90,.26);border:1px solid rgba(196,163,90,.38);}
+.mbub{max-width:76%;padding:.82rem 1.1rem;font-size:.86rem;line-height:1.65;}
+.msg.b .mbub{background:rgba(61,90,62,.2);border:1px solid rgba(61,90,62,.35);color:var(--glacier);border-radius:0 12px 12px 12px;}
+.msg.u .mbub{background:rgba(196,163,90,.12);border:1px solid rgba(196,163,90,.2);color:var(--snow);border-radius:12px 0 12px 12px;text-align:right;}
+.typing{display:flex;gap:4px;align-items:center;padding:.5rem 0;}
+.typing span{width:6px;height:6px;background:var(--sage);border-radius:50%;animation:tb 1.2s infinite;}
+.typing span:nth-child(2){animation-delay:.2s;}
+.typing span:nth-child(3){animation-delay:.4s;}
+.chips{padding:.8rem 1.8rem;display:flex;gap:.45rem;flex-wrap:wrap;border-top:1px solid rgba(200,221,209,.045);border-bottom:1px solid rgba(200,221,209,.045);}
+.chip{font-family:'Barlow Condensed',sans-serif;font-size:.68rem;letter-spacing:.07em;padding:.36rem .95rem;background:transparent;border:1px solid rgba(196,163,90,.17);color:var(--sage);cursor:pointer;transition:all .15s;white-space:nowrap;}
+.chip:hover{background:rgba(196,163,90,.09);color:var(--amber);border-color:var(--amber);}
+.cinput{display:flex;padding:1.2rem 1.8rem;}
+.ci{flex:1;background:rgba(200,221,209,.045);border:1px solid rgba(200,221,209,.09);border-right:none;padding:.88rem 1.1rem;color:var(--snow);font-family:'Barlow',sans-serif;font-size:.87rem;outline:none;transition:border-color .2s;}
+.ci::placeholder{color:rgba(200,221,209,.26);}
+.ci:focus{border-color:rgba(196,163,90,.36);}
+.csend{background:var(--gold);color:var(--stone);border:none;padding:.88rem 1.4rem;cursor:pointer;font-size:1rem;transition:background .2s;flex-shrink:0;}
+.csend:hover{background:var(--amber);}
+.csend:disabled{opacity:.42;cursor:not-allowed;}
+
+footer{background:rgba(0,0,0,.55);border-top:1px solid rgba(196,163,90,.07);padding:3rem;text-align:center;}
+footer p{font-family:'Barlow Condensed',sans-serif;font-size:.71rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);opacity:.5;line-height:2.2;}
+footer a{color:var(--gold);text-decoration:none;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes tb{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+
+@media(max-width:640px){#chatbot [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;}}
+@media(max-width:960px){
+  nav ul{display:none;}
+  .intro-grid,.reco-grid{grid-template-columns:1fr;gap:3rem;}
+  .reco-vis{position:static;}
+  .s-intro,.s-act,.s-reco,.s-chat{padding:5rem 1.5rem;}
+  nav{padding:1rem 1.5rem;}
+  .sgrid{grid-template-columns:1fr;}
+  .tgrid{grid-template-columns:1fr;}
+  .hero-strip{flex-wrap:wrap;}
+  .strip-item{padding:.8rem 1.2rem;}
+}
+</style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <a class="nav-logo" href="#">Bariloche<span>Trekking</span></a>
+  <ul>
+    <li><a href="#actividades">Senderos</a></li>
+    <li><a href="#travesias">Travesías</a></li>
+    <li><a href="#recomendaciones">Recomendaciones</a></li>
+    <li><a href="#chatbot">Jhon · Asistente</a></li>
+    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfA648UB5QqYRZrpJkUKSQO75ikmfe9AbF3NtRSzcfYL0wDEg/viewform" target="_blank" class="nav-reg">Registro</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-photo"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-grade"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Parque Nacional Nahuel Huapi · Patagonia Argentina</p>
+    <h1>Bariloche<em>Trekking</em></h1>
+    <p class="hero-desc">Tu guía completa para explorar los senderos, travesías y caminatas de Bariloche. Información confiable y actualizada para que cada salida sea segura e inolvidable.</p>
+    <div class="hero-ctas">
+      <a href="#actividades" class="btn-p">Explorar Senderos</a>
+      <a href="#chatbot" class="btn-s">Preguntarle a Jhon ↓</a>
+    </div>
+  </div>
+  <div class="hero-strip">
+    <div class="strip-item"><span class="strip-icon">🏔️</span><span class="strip-txt"><strong>+100 Senderos</strong>Clasificados y documentados</span></div>
+    <div class="strip-item"><span class="strip-icon">📐</span><span class="strip-txt"><strong>Datos técnicos</strong>Distancia · Altimetría · GPS</span></div>
+    <div class="strip-item"><span class="strip-icon">📋</span><span class="strip-txt"><strong>Registro</strong>Obligatorio y gratuito</span></div>
+    <div class="strip-item"><span class="strip-icon">🚨</span><span class="strip-txt"><strong>Emergencias</strong>105 · 103 · 911</span></div>
+  </div>
+</section>
+
+<!-- ══ INTRO ══ -->
+<section class="s-intro" id="intro">
+  <div class="intro-grid">
+    <div>
+      <span class="lbl">¿Qué es Bariloche Trekking?</span>
+      <h2 class="h2-serif">La plataforma oficial del <em>senderismo patagónico</em></h2>
+      <p class="body-txt">Barilochetrekking.com es la plataforma virtual oficial creada para impulsar y poner en valor los senderos de Bariloche y el Parque Nacional Nahuel Huapi. Concentra toda la oferta de senderismo local para posicionar a Bariloche como el destino de aventura por excelencia de América del Sur.</p>
+      <p class="body-txt">Cuenta con el aporte técnico de la Administración de Parques Nacionales, el Municipio de Bariloche, el Club Andino Bariloche, la AAGM y el EMPROTUR, garantizando información confiable y de primera mano.</p>
+      <div class="kpi-row">
+        <div><span class="kpi-val">+10</span><span class="kpi-lbl">Refugios de montaña</span></div>
+        <div><span class="kpi-val">5</span><span class="kpi-lbl">Niveles de dificultad</span></div>
+        <div><span class="kpi-val">12</span><span class="kpi-lbl">Meses disponibles</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="info-card">
+        <span class="lbl">Registro de Trekking</span>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--snow);margin-bottom:.9rem;">Obligatorio y gratuito</h3>
+        <p style="color:var(--glacier);font-weight:300;line-height:1.7;font-size:.88rem;margin-bottom:1rem;">El Registro es obligatorio para la mayoría de los senderos. Facilita las tareas de búsqueda y rescate en emergencias. Completarlo es rápido y gratuito.</p>
+        <ul style="list-style:none;margin-bottom:1.4rem;">
+          <li style="color:var(--sage);font-size:.83rem;padding:.32rem 0;border-bottom:1px solid rgba(200,221,209,.055);display:flex;align-items:center;gap:.55rem;"><span style="color:var(--gold)">—</span>Completar máximo 48hs antes de la salida</li>
+          <li style="color:var(--sage);font-size:.83rem;padding:.32rem 0;border-bottom:1px solid rgba(200,221,209,.055);display:flex;align-items:center;gap:.55rem;"><span style="color:var(--gold)">—</span>Un registro único por grupo de personas</li>
+          <li style="color:var(--sage);font-size:.83rem;padding:.32rem 0;display:flex;align-items:center;gap:.55rem;"><span style="color:var(--gold)">—</span>Se requiere correo electrónico válido</li>
+        </ul>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfA648UB5QqYRZrpJkUKSQO75ikmfe9AbF3NtRSzcfYL0wDEg/viewform" target="_blank" class="btn-p">Completar Registro →</a>
+      </div>
+      <div class="emerg-box">
+        <h4>🚨 Emergencias en la Montaña</h4>
+        <p><strong>ICE Parques Nacionales:</strong> 105 / (0294) 4422479</p>
+        <p><strong>Protección Civil (Municipio):</strong> 103 / (0294) 4428276</p>
+        <p><strong>Club Andino Bariloche:</strong> +549 294 463-6960</p>
+        <p><strong>Mensajería Satelital:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8deee2e0e4fee4e2e3e9e8ecf8f5e4e1e4e2eeecefcdeae0ece4e1a3eee2e0">[email&#160;protected]</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ACTIVIDADES ══ -->
+<section class="s-act" id="actividades">
+  <div class="s-hdr">
+    <span class="s-lbl">Actividades</span>
+    <h2 class="s-title">Encuentra tu sendero</h2>
+    <p class="s-sub">Cada sendero incluye perfil altimétrico SVG, distancia, desnivel acumulado, duración estimada, coordenadas GPS y temporada óptima.</p>
+  </div>
+  <div style="max-width:1300px;margin:0 auto;">
+    <div class="act-tabs">
+      <button class="tab-btn active" onclick="switchAct('senderos',this)">Senderos por Dificultad</button>
+      <button class="tab-btn" onclick="switchAct('cortas',this)">Caminatas Cortas</button>
+      <button class="tab-btn" onclick="switchAct('travesias',this)">Travesías</button>
+    </div>
+
+    <!-- ═ SENDEROS ═ -->
+    <div id="act-senderos" class="diff-sec">
+      <div class="diff-tabs">
+        <button class="dtab active" onclick="switchDiff('baja',this)"><span class="dot d-baja"></span>Baja</button>
+        <button class="dtab" onclick="switchDiff('media',this)"><span class="dot d-media"></span>Media</button>
+        <button class="dtab" onclick="switchDiff('alta',this)"><span class="dot d-alta"></span>Alta</button>
+        <button class="dtab" onclick="switchDiff('muyalta',this)"><span class="dot d-muyalta"></span>Muy Alta</button>
+        <button class="dtab" onclick="switchDiff('extrema',this)"><span class="dot d-extrema"></span>Extrema</button>
+      </div>
+
+      <!-- BAJA -->
+      <div id="diff-baja" class="dcontent active">
+        <div class="diff-hdr"><span class="badge bg-baja">🟢 Dificultad Baja</span><h3>Para todos · Sin experiencia previa</h3><p>Terrenos llanos o con desnivel leve, senderos bien señalizados y de corta duración. Algunos no requieren Registro de Trekking. Aptos para familias con niños.</p></div>
+        <div class="sgrid">
+
+          <!-- CARD: Campanario -->
+          <div class="scard">
+            <div class="smap">
+              <div class="topo"></div>
+              <svg viewBox="0 0 400 158" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="gb1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5cb85c" stop-opacity=".42"/><stop offset="100%" stop-color="#5cb85c" stop-opacity=".04"/></linearGradient></defs>
+                <!-- terrain fill -->
+                <polygon points="0,135 80,128 160,108 240,80 295,74 350,82 400,90 400,158 0,158" fill="url(#gb1)"/>
+                <!-- profile line -->
+                <polyline points="0,135 80,128 160,108 240,80 295,74 350,82 400,90" fill="none" stroke="#5cb85c" stroke-width="2.2" stroke-linejoin="round"/>
+                <!-- peak dot -->
+                <circle cx="295" cy="74" r="5.5" fill="#c4a35a"/>
+                <!-- peak label -->
+                <text x="295" y="62" text-anchor="middle" font-size="9" fill="rgba(196,163,90,.75)" font-family="'Barlow Condensed',sans-serif" font-weight="700">▲ CIMA 1085m</text>
+                <!-- start dot -->
+                <circle cx="0" cy="135" r="5" fill="#5cb85c"/>
+                <!-- grid lines -->
+                <line x1="133" y1="15" x2="133" y2="158" stroke="rgba(200,221,209,.06)" stroke-dasharray="3,5"/>
+                <line x1="266" y1="15" x2="266" y2="158" stroke="rgba(200,221,209,.06)" stroke-dasharray="3,5"/>
+                <text x="133" y="12" text-anchor="middle" font-size="8" fill="rgba(200,221,209,.3)" font-family="'Barlow Condensed',sans-serif">1 km</text>
+                <text x="266" y="12" text-anchor="middle" font-size="8" fill="rgba(200,221,209,.3)" font-family="'Barlow Condensed',sans-serif">2 km</text>
+                <!-- alt scale -->
+                <text x="8" y="133" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">830m</text>
+                <text x="8" y="78" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">1085m</text>
+              </svg>
+              <span class="mlbl s">📍 Ruta 77 km 17</span><span class="mlbl e">🏁 Cima Campanario</span>
+              <span class="mcoords">41°03'S 71°30'O</span>
+            </div>
+            <div class="sbody">
+              <h4>Cerro Campanario – Circuito Chico</h4>
+              <div class="sstats">
+                <div><span class="sv">2 km</span><span class="sl">Distancia</span></div>
+                <div><span class="sv">+255m</span><span class="sl">Ascenso</span></div>
+                <div><span class="sv">50 min</span><span class="sl">Duración</span></div>
+                <div><span class="sv">1085m</span><span class="sl">Alt. máx.</span></div>
+              </div>
+              <div class="stags"><span class="stag">Todo el año</span><span class="stag">Vista 360°</span><span class="stag">⭐ Imperdible</span></div>
+              <p class="sdesc">Ascenso corto con vistas panorámicas a los lagos Nahuel Huapi, Moreno y Gutiérrez y al volcán Tronador. Considerado uno de los miradores más espectaculares del mundo. Sendero bien marcado con señalética.</p>
+            </div>
+          </div>
+
+          <!-- CARD: Arrayanes -->
+          <div class="scard">
+            <div class="smap">
+              <div class="topo"></div>
+              <svg viewBox="0 0 400 158" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="gb2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5cb85c" stop-opacity=".4"/><stop offset="100%" stop-color="#5cb85c" stop-opacity=".04"/></linearGradient></defs>
+                <rect x="0" y="102" width="400" height="56" fill="rgba(20,55,80,.28)"/>
+                <polygon points="0,130 120,127 240,121 360,118 400,119 400,158 0,158" fill="url(#gb2)"/>
+                <polyline points="0,130 120,127 240,121 360,118 400,119" fill="none" stroke="#5cb85c" stroke-width="2.2" stroke-linejoin="round"/>
+                <circle cx="0" cy="130" r="5" fill="#5cb85c"/>
+                <circle cx="400" cy="119" r="5" fill="#5cb85c"/>
+                <text x="8" y="128" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">762m</text>
+                <line x1="200" y1="15" x2="200" y2="158" stroke="rgba(200,221,209,.06)" stroke-dasharray="3,5"/>
+                <text x="200" y="12" text-anchor="middle" font-size="8" fill="rgba(200,221,209,.3)" font-family="'Barlow Condensed',sans-serif">1.8 km</text>
+              </svg>
+              <span class="mlbl s">📍 P. Municipal Llao LLao</span><span class="mlbl e">🏁 Bosque Arrayanes</span>
+              <span class="mcoords">41°03'S 71°34'O</span>
+            </div>
+            <div class="sbody">
+              <h4>Sendero Arrayanes – Parque Municipal Llao LLao</h4>
+              <div class="sstats">
+                <div><span class="sv">3.5 km</span><span class="sl">Distancia</span></div>
+                <div><span class="sv">+60m</span><span class="sl">Ascenso</span></div>
+                <div><span class="sv">1.5 h</span><span class="sl">Duración</span></div>
+                <div><span class="sv">820m</span><span class="sl">Alt. máx.</span></div>
+              </div>
+              <div class="stags"><span class="stag">Todo el año</span><span class="stag">Patrimonio natural</span><span class="stag">Cobro acceso</span></div>
+              <p class="sdesc">El bosque de arrayanes (Luma apiculata) más extenso del mundo. Pasarelas sobre el lago con árboles de corteza canela y flores blancas. Ingreso con cobro al Parque Municipal. Sin Registro APN.</p>
+            </div>
+          </div>
+
+          <!-- CARD: Cascada Duendes -->
+          <div class="scard">
+            <div class="smap">
+              <div class="topo"></div>
+              <svg viewBox="0 0 400 158" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="gb3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5cb85c" stop-opacity=".4"/><stop offset="100%" stop-color="#5cb85c" stop-opacity=".04"/></linearGradient></defs>
+                <polygon points="0,133 100,129 200,113 280,90 320,92 370,108 400,118 400,158 0,158" fill="url(#gb3)"/>
+                <polyline points="0,133 100,129 200,113 280,90 320,92 370,108 400,118" fill="none" stroke="#5cb85c" stroke-width="2.2" stroke-linejoin="round"/>
+                <circle cx="0" cy="133" r="5" fill="#5cb85c"/>
+                <circle cx="280" cy="90" r="5.5" fill="#c4a35a"/>
+                <text x="280" y="78" text-anchor="middle" font-size="9" fill="rgba(196,163,90,.72)" font-family="'Barlow Condensed',sans-serif">▲ Cascada 900m</text>
+                <text x="8" y="131" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">750m</text>
+              </svg>
+              <span class="mlbl s">📍 Seccional Lag. Gutiérrez</span><span class="mlbl e">🏁 Cascada Duendes</span>
+              <span class="mcoords">41°09'S 71°27'O</span>
+            </div>
+            <div class="sbody">
+              <h4>Lago Gutiérrez – Cascada de los Duendes</h4>
+              <div class="sstats">
+                <div><span class="sv">6 km</span><span class="sl">Distancia</span></div>
+                <div><span class="sv">+150m</span><span class="sl">Ascenso</span></div>
+                <div><span class="sv">2 h</span><span class="sl">Duración</span></div>
+                <div><span class="sv">900m</span><span class="sl">Alt. máx.</span></div>
+              </div>
+              <div class="stags"><span class="stag">Todo el año</span><span class="stag">Familia</span><span class="stag">Cascada</span></div>
+              <p class="sdesc">Sendero suave desde la seccional del Lago Gutiérrez hasta una bella cascada en bosque nativo. Ideal para ir con niños. Bien señalizado, sin pendiente pronunciada. No requiere Registro APN.</p>
+            </div>
+          </div>
+
+          <!-- CARD: Puerto Blest -->
+          <div class="scard">
+            <div class="smap">
+              <div class="topo"></div>
+              <svg viewBox="0 0 400 158" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="gb4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5cb85c" stop-opacity=".38"/><stop offset="100%" stop-color="#5cb85c" stop-opacity=".04"/></linearGradient></defs>
+                <rect x="0" y="100" width="400" height="58" fill="rgba(20,60,75,.3)"/>
+                <polygon points="0,129 80,126 160,120 240,116 320,118 400,124 400,158 0,158" fill="url(#gb4)"/>
+                <polyline points="0,129 80,126 160,120 240,116 320,118 400,124" fill="none" stroke="#5cb85c" stroke-width="2.2" stroke-linejoin="round"/>
+                <circle cx="0" cy="129" r="5" fill="#5cb85c"/>
+                <circle cx="400" cy="124" r="5" fill="#5cb85c"/>
+                <text x="8" y="127" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">788m</text>
+              </svg>
+              <span class="mlbl s">📍 Puerto Blest</span><span class="mlbl e">🏁 Puerto Cántaros</span>
+              <span class="mcoords">41°01'S 71°51'O</span>
+            </div>
+            <div class="sbody">
+              <h4>Puerto Blest – Puerto Cántaros</h4>
+              <div class="sstats">
+                <div><span class="sv">3 km</span><span class="sl">Distancia</span></div>
+                <div><span class="sv">+80m</span><span class="sl">Ascenso</span></div>
+                <div><span class="sv">1–2 h</span><span class="sl">Duración</span></div>
+                <div><span class="sv">800m</span><span class="sl">Alt. máx.</span></div>
+              </div>
+              <div class="stags"><span class="stag">Todo el año</span><span class="stag">Selva valdiviana</span><span class="stag">Acceso lacustre</span></div>
+              <p class="sdesc">Sendero plano en selva valdiviana entre dos puertos sobre el lago Nahuel Huapi. Vegetación exuberante y humedad característica del bosque lluvioso patagónico. Acceso en catamaran desde Bariloche.</p>
+            </div>
+          </div>
+
+          <!-- CARD: Llao LLao -->
+          <div class="scard">
+            <div class="smap">
+              <div class="topo"></div>
+              <svg viewBox="0 0 400 158" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="gb5" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5cb85c" stop-opacity=".4"/><stop offset="100%" stop-color="#5cb85c" stop-opacity=".04"/></linearGradient></defs>
+                <polygon points="0,132 80,124 160,104 230,86 270,88 330,100 400,115 400,158 0,158" fill="url(#gb5)"/>
+                <polyline points="0,132 80,124 160,104 230,86 270,88 330,100 400,115" fill="none" stroke="#5cb85c" stroke-width="2.2" stroke-linejoin="round"/>
+                <circle cx="230" cy="86" r="5.5" fill="#c4a35a"/>
+                <text x="230" y="74" text-anchor="middle" font-size="9" fill="rgba(196,163,90,.72)" font-family="'Barlow Condensed',sans-serif">▲ CIMA 1011m</text>
+                <text x="8" y="130" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">830m</text>
+              </svg>
+              <span class="mlbl s">📍 P. Municipal Llao LLao</span><span class="mlbl e">🏁 Cima Cerro Llao LLao</span>
+              <span class="mcoords">41°03'S 71°34'O</span>
+            </div>
+            <div class="sbody">
+              <h4>Sendero al Cerro Llao LLao – Parque Municipal</h4>
+              <div class="sstats">
+                <div><span class="sv">5.5 km</span><span class="sl">Distancia</span></div>
+                <div><span class="sv">+181m</span><span class="sl">Ascenso</span></div>
+                <div><span class="sv">2 h</span><span class="sl">Duración</span></div>
+                <div><span class="sv">1011m</span><span class="sl">Alt. máx.</span></div>
+              </div>
+              <div class="stags"><span class="stag">Todo el año</span><span class="stag">Vistas al lago</span><span class="stag">Bosque arrayanes</span></div>
+              <p class="sdesc">Ascenso accesible por el interior del Parque Municipal Llao LLao. La cima ofrece vistas al Brazo Tristeza y Brazo Rincón del lago Nahuel Huapi. Cobro de acceso al parque municipal.</p>
+            </div>
+          </div>
+
+          <!-- CARD: Los Moscos -->
+          <div class="scard">
+            <div class="smap">
+              <div class="topo"></div>
+              <svg viewBox="0 0 400 158" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="gb6" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5cb85c" stop-opacity=".38"/><stop offset="100%" stop-color="#5cb85c" stop-opacity=".04"/></linearGradient></defs>
+                <rect x="0" y="102" width="400" height="56" fill="rgba(20,55,80,.26)"/>
+                <polygon points="0,131 100,128 200,122 300,120 400,122 400,158 0,158" fill="url(#gb6)"/>
+                <polyline points="0,131 100,128 200,122 300,120 400,122" fill="none" stroke="#5cb85c" stroke-width="2.2" stroke-linejoin="round"/>
+                <text x="8" y="129" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">808m</text>
+              </svg>
+              <span class="mlbl s">📍 Los Rápidos – Lago Mascardi</span><span class="mlbl e">🏁 Lago Los Moscos</span>
+              <span class="mcoords">41°17'S 71°47'O</span>
+            </div>
+            <div class="sbody">
+              <h4>Los Rápidos – Lago Los Moscos</h4>
+              <div class="sstats">
+                <div><span class="sv">4 km</span><span class="sl">Distancia</span></div>
+                <div><span class="sv">+80m</span><span class="sl">Ascenso</span></div>
+                <div><span class="sv">1.5 h</span><span class="sl">Duración</span></div>
+                <div><span class="sv">815m</span><span class="sl">Alt. máx.</span></div>
+              </div>
+              <div class="stags"><span class="stag">Todo el año</span><span class="stag">Lago remoto</span><span class="stag">Fauna autóctona</span></div>
+              <p class="sdesc">Sendero entre el lago Mascardi y el lago Los Moscos, cerca de Pampa Linda. Bosque de lengas y coihues, vistas al volcán Tronador. Buenas chances de avistar huemul y fauna patagónica.</p>
+            </div>
+          </div>
+
+        </div><!-- /sgrid baja -->
+      </div><!-- /diff-baja -->
+
+      <!-- MEDIA -->
+      <div id="diff-media" class="dcontent">
+        <div class="diff-hdr"><span class="badge bg-media">🟡 Dificultad Media</span><h3>Experiencia mínima · Registro obligatorio</h3><p>Terreno con pendiente moderada, posibles tramos con barro o rocas. Requiere preparación física básica. Siempre completar el Registro de Trekking antes de salir.</p></div>
+        <div class="sgrid">
+
+          <div class="scard">
+            <div class="smap"><div class="topo"></div>
+              <svg viewBox="0 0 400 158" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="gm1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f0ad4e" stop-opacity=".42"/><stop offset="100%" stop-color="#f0ad4e" stop-opacity=".04"/></linearGradient></defs>
+                <polygon points="0,136 80,120 160,95 240,74 285,72 340,88 380,108 400,115 400,158 0,158" fill="url(#gm1)"/>
+                <polyline points="0,136 80,120 160,95 240,74 285,72 340,88 380,108 400,115" fill="none" stroke="#f0ad4e" stroke-width="2.2" stroke-linejoin="round"/>
+                <circle cx="285" cy="72" r="5.5" fill="#c4a35a"/>
+                <text x="285" y="60" text-anchor="middle" font-size="9" fill="rgba(196,163,90,.75)" font-family="'Barlow Condensed',sans-serif">▲ Mirador 1400m</text>
+                <text x="8" y="134" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">900m</text>
+              </svg>
+              <span class="mlbl s">📍 Refugio Neumeyer</span><span class="mlbl e">🏁 Mirador Lag. Verde</span>
+              <span class="mcoords">41°11'S 71°32'O</span>
+            </div>
+            <div class="sbody">
+              <h4>Refugio Neumeyer – Mirador Laguna Verde</h4>
+              <div class="sstats">
+                <div><span class="sv">8 km</span><span class="sl">Distancia</span></div>
+                <div><span class="sv">+500m</span><span class="sl">Ascenso</span></div>
+                <div><span class="sv">4–5 h</span><span class="sl">Duración</span></div>
+                <div><span class="sv">1400m</span><span class="sl">Alt. máx.</span></div>
+              </div>
+              <div class="stags"><span class="stag">Nov–Abr (media)</span><span class="stag">May–Oct (alta)</span><span class="stag">Registro requerido</span></div>
+              <p class="sdesc">Ascenso desde el Refugio Neumeyer hasta un mirador sobre la Laguna Verde con vistas directas al volcán Tronador. En invierno puede tener nieve y hielo, aumentando la dificultad considerablemente.</p>
+            </div>
+          </div>
+
+          <div class="scard">
+            <div class="smap"><div class="topo"></div>
+              <svg viewBox="0 0 400 158" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="gm2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f0ad4e" stop-opacity=".4"/><stop offset="100%" stop-color="#f0ad4e" stop-opacity=".04"/></linearGradient></defs>
+                <polygon points="0,132 80,120 160,96 240,75 280,78 340,94 380,110 400,116 400,158 0,158" fill="url(#gm2)"/>
+                <polyline points="0,132 80,120 160,96 240,75 280,78 340,94 380,110 400,116" fill="none" stroke="#f0ad4e" stroke-width="2.2" stroke-linejoin="round"/>
+                <circle cx="240" cy="75" r="5.5" fill="#c4a35a"/>
+                <text x="240" y="63" text-anchor="middle" font-size="9" fill="rgba(196,163,90,.72)" font-family="'Barlow Condensed',sans-serif">▲ Castillo Rojo 1350m</text>
+                <text x="8" y="130" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">980m</text>
+              </svg>
+              <span class="mlbl s">📍 Seccional Los Césares</span><span class="mlbl e">🏁 Castillo Rojo</span>
+              <span class="mcoords">41°10'S 71°24'O</span>
+            </div>
+            <div class="sbody">
+              <h4>Los Césares – Castillo Rojo</h4>
+              <div class="sstats">
+                <div><span class="sv">10 km</span><span class="sl">Distancia</span></div>
+                <div><span class="sv">+370m</span><span class="sl">Ascenso</span></div>
+                <div><span class="sv">4–5 h</span><span class="sl">Duración</span></div>
+                <div><span class="sv">1350m</span><span class="sl">Alt. máx.</span></div>
+              </div>
+              <div class="stags"><span class="stag">Nov–Abr (media)</span><span class="stag">May–Oct (muy alta)</span><span class="stag">Formación rocosa</span></div>
+              <p class="sdesc">Sendero hacia una formación rocosa de color rojizo característica del sector Los Césares. Terreno mixto con bosque y sectores abiertos. Vistas al lago Los Césares y la cordillera andina.</p>
+            </div>
+          </div>
+
+          <div class="scard">
+            <div class="smap"><div class="topo"></div>
+              <svg viewBox="0 0 400 158" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="gm3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f0ad4e" stop-opacity=".4"/><stop offset="100%" stop-color="#f0ad4e" stop-opacity=".04"/></linearGradient></defs>
+                <polygon points="0,133 80,118 160,92 240,68 295,70 355,88 400,105 400,158 0,158" fill="url(#gm3)"/>
+                <polyline points="0,133 80,118 160,92 240,68 295,70 355,88 400,105" fill="none" stroke="#f0ad4e" stroke-width="2.2" stroke-linejoin="round"/>
+                <circle cx="240" cy="68" r="5.5" fill="#c4a35a"/>
+                <text x="240" y="56" text-anchor="middle" font-size="9" fill="rgba(196,163,90,.75)" font-family="'Barlow Condensed',sans-serif">▲ Glaciar C.O. 1480m</text>
+                <text x="8" y="131" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">850m</text>
+              </svg>
+              <span class="mlbl s">📍 Pampa Linda</span><span class="mlbl e">🏁 Mirador Glaciar C.O.</span>
+              <span class="mcoords">41°19'S 71°52'O</span>
+            </div>
+            <div class="sbody">
+              <h4>Pampa Linda – Mirador Glaciar Castaño Overa</h4>
+              <div class="sstats">
+                <div><span class="sv">12 km</span><span class="sl">Distancia</span></div>
+                <div><span class="sv">+630m</span><span class="sl">Ascenso</span></div>
+                <div><span class="sv">5–6 h</span><span class="sl">Duración</span></div>
+                <div><span class="sv">1480m</span><span class="sl">Alt. máx.</span></div>
+              </div>
+              <div class="stags"><span class="stag">Nov–Abr (media)</span><span class="stag">May–Oct (muy alta)</span><span class="stag">Glaciar · Tronador</span></div>
+              <p class="sdesc">Vista directa al glaciar Castaño Overa en el flanco del volcán Tronador. Asciende por el Valle del Manso atravesando bosques de lengas y zonas abiertas con vistas a los glaciares colgantes.</p>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /diff-media -->
+
+      <!-- ALTA -->
+      <div id="diff-alta" class="dcontent">
+        <div class="diff-hdr"><span class="badge bg-alta">🟠 Dificultad Alta</span><h3>Experiencia en montaña · Buena condición física</h3><p>Puede presentar escalada simple, vadeos de arroyos, pedrero y barro. Requiere botines de trekking, bastones y ropa técnica. Registro de Trekking obligatorio.</p></div>
+        <div class="sgrid">
+
+          <div class="scard">
+            <div class="smap"><div class="topo"></div>
+              <svg viewBox="0 0 400 158" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="ga1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e8872a" stop-opacity=".44"/><stop offset="100%" stop-color="#e8872a" stop-opacity=".04"/></linearGradient></defs>
+                <polygon points="0,138 60,126 120,102 180,74 225,58 265,62 320,88 380,110 400,117 400,158 0,158" fill="url(#ga1)"/>
+                <polyline points="0,138 60,126 120,102 180,74 225,58 265,62 320,88 380,110 400,117" fill="none" stroke="#e8872a" stroke-width="2.2" stroke-linejoin="round"/>
+                <circle cx="225" cy="58" r="5.5" fill="#c4a35a"/>
+                <text x="225" y="46" text-anchor="middle" font-size="9" fill="rgba(196,163,90,.75)" font-family="'Barlow Condensed',sans-serif">▲ Piedra Pérez 1680m</text>
+                <text x="8" y="136" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">850m</text>
+              </svg>
+              <span class="mlbl s">📍 Pampa Linda</span><span class="mlbl e">🏁 Piedra Pérez</span>
+              <span class="mcoords">41°19'S 71°52'O</span>
+            </div>
+            <div class="sbody">
+              <h4>Pampa Linda – Piedra Pérez</h4>
+              <div class="sstats">
+                <div><span class="sv">14 km</span><span class="sl">Distancia</span></div>
+                <div><span class="sv">+830m</span><span class="sl">Ascenso</span></div>
+                <div><span class="sv">6–7 h</span><span class="sl">Duración</span></div>
+                <div><span class="sv">1680m</span><span class="sl">Alt. máx.</span></div>
+              </div>
+              <div class="stags"><span class="stag">Nov–Abr (alta)</span><span class="stag">May–Oct (muy alta)</span><span class="stag">Base Tronador</span></div>
+              <p class="sdesc">Acceso a la base del volcán Tronador desde Pampa Linda. Terreno variado: bosque, mallines y pedrero en la parte alta. Vistas espectaculares al glaciar Manso y los paredones de hielo del Tronador.</p>
+            </div>
+          </div>
+
+          <div class="scard">
+            <div class="smap"><div class="topo"></div>
+              <svg viewBox="0 0 400 158" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="ga2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e8872a" stop-opacity=".42"/><stop offset="100%" stop-color="#e8872a" stop-opacity=".04"/></linearGradient></defs>
+                <polygon points="0,136 60,122 120,94 180,66 240,52 280,55 340,82 400,106 400,158 0,158" fill="url(#ga2)"/>
+                <polyline points="0,136 60,122 120,94 180,66 240,52 280,55 340,82 400,106" fill="none" stroke="#e8872a" stroke-width="2.2" stroke-linejoin="round"/>
+                <circle cx="240" cy="52" r="5.5" fill="#c4a35a"/>
+                <text x="240" y="40" text-anchor="middle" font-size="9" fill="rgba(196,163,90,.75)" font-family="'Barlow Condensed',sans-serif">▲ Lag. Azul (Calvú) 1720m</text>
+                <text x="8" y="134" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">980m</text>
+              </svg>
+              <span class="mlbl s">📍 Seccional Los Césares</span><span class="mlbl e">🏁 Laguna Azul (Calvú)</span>
+              <span class="mcoords">41°10'S 71°24'O</span>
+            </div>
+            <div class="sbody">
+              <h4>Los Césares – Laguna Azul (Calvú)</h4>
+              <div class="sstats">
+                <div><span class="sv">16 km</span><span class="sl">Distancia</span></div>
+                <div><span class="sv">+740m</span><span class="sl">Ascenso</span></div>
+                <div><span class="sv">7 h</span><span class="sl">Duración</span></div>
+                <div><span class="sv">1720m</span><span class="sl">Alt. máx.</span></div>
+              </div>
+              <div class="stags"><span class="stag">Nov–Abr (alta)</span><span class="stag">May–Oct (muy alta)</span><span class="stag">Laguna de altura</span></div>
+              <p class="sdesc">Acceso a la laguna de color azul intenso (Calvú en mapuche). Subida por filo con pedrero y exposición al viento. Vistas incomparables desde la cima. En invierno: nieve, crampones recomendados.</p>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /diff-alta -->
+
+      <!-- MUY ALTA -->
+      <div id="diff-muyalta" class="dcontent">
+        <div class="diff-hdr"><span class="badge bg-muyalta">🔴 Dificultad Muy Alta</span><h3>Mucha experiencia · Equipamiento especializado · Guía recomendado</h3><p>Excelente condición física y equipo específico. Se recomienda ir con un Guía de Montaña habilitado por la Administración de Parques Nacionales.</p></div>
+        <div class="sgrid">
+
+          <div class="scard">
+            <div class="smap"><div class="topo"></div>
+              <svg viewBox="0 0 400 158" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="gma1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d9534f" stop-opacity=".44"/><stop offset="100%" stop-color="#d9534f" stop-opacity=".04"/></linearGradient></defs>
+                <polygon points="0,138 50,128 100,108 155,78 200,50 242,44 278,52 335,78 380,102 400,110 400,158 0,158" fill="url(#gma1)"/>
+                <polyline points="0,138 50,128 100,108 155,78 200,50 242,44 278,52 335,78 380,102 400,110" fill="none" stroke="#d9534f" stroke-width="2.2" stroke-linejoin="round"/>
+                <!-- snow zone -->
+                <polyline points="185,52 242,44 278,52" fill="none" stroke="rgba(242,246,244,.45)" stroke-width="6" stroke-linejoin="round"/>
+                <circle cx="242" cy="44" r="5.5" fill="#c4a35a"/>
+                <text x="242" y="32" text-anchor="middle" font-size="9" fill="rgba(196,163,90,.75)" font-family="'Barlow Condensed',sans-serif">▲ Laguna LLum 1900m</text>
+                <text x="8" y="136" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">980m</text>
+                <!-- day split -->
+                <line x1="200" y1="10" x2="200" y2="158" stroke="rgba(200,221,209,.06)" stroke-dasharray="3,5"/>
+                <text x="100" y="12" text-anchor="middle" font-size="8" fill="rgba(200,221,209,.28)" font-family="'Barlow Condensed',sans-serif">DÍA 1</text>
+                <text x="310" y="12" text-anchor="middle" font-size="8" fill="rgba(200,221,209,.28)" font-family="'Barlow Condensed',sans-serif">DÍA 2</text>
+              </svg>
+              <span class="mlbl s">📍 Seccional Los Césares</span><span class="mlbl e">🏁 Laguna LLum (2 días)</span>
+              <span class="mcoords">41°12'S 71°22'O</span>
+            </div>
+            <div class="sbody">
+              <h4>Los Césares – Laguna LLum (2 días / 1 pernocte)</h4>
+              <div class="sstats">
+                <div><span class="sv">22 km</span><span class="sl">Distancia</span></div>
+                <div><span class="sv">+920m</span><span class="sl">Ascenso</span></div>
+                <div><span class="sv">2 días</span><span class="sl">Duración</span></div>
+                <div><span class="sv">1900m</span><span class="sl">Alt. máx.</span></div>
+              </div>
+              <div class="stags"><span class="stag">Nov–Abr (alta)</span><span class="stag">May–Oct (muy alta)</span><span class="stag">1 pernocte · Carpa</span></div>
+              <p class="sdesc">Travesía de dos días hasta la remota Laguna LLum. Terreno expuesto con escalada simple y roca suelta. En invierno: crampones y raquetas imprescindibles. Pernocte en lugar habilitado.</p>
+            </div>
+          </div>
+
+          <div class="scard">
+            <div class="smap"><div class="topo"></div>
+              <svg viewBox="0 0 400 158" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="gma2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d9534f" stop-opacity=".42"/><stop offset="100%" stop-color="#d9534f" stop-opacity=".04"/></linearGradient></defs>
+                <polygon points="0,136 50,122 100,96 150,64 190,42 222,38 260,48 315,74 365,100 400,113 400,158 0,158" fill="url(#gma2)"/>
+                <polyline points="0,136 50,122 100,96 150,64 190,42 222,38 260,48 315,74 365,100 400,113" fill="none" stroke="#d9534f" stroke-width="2.2" stroke-linejoin="round"/>
+                <polyline points="178,44 222,38 260,48" fill="none" stroke="rgba(242,246,244,.42)" stroke-width="6" stroke-linejoin="round"/>
+                <circle cx="222" cy="38" r="5.5" fill="#c4a35a"/>
+                <text x="222" y="26" text-anchor="middle" font-size="9" fill="rgba(196,163,90,.75)" font-family="'Barlow Condensed',sans-serif">▲ Cerro Volcánico 2035m</text>
+                <text x="8" y="134" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">850m</text>
+              </svg>
+              <span class="mlbl s">📍 Pampa Linda</span><span class="mlbl e">🏁 Cerro Volcánico</span>
+              <span class="mcoords">41°21'S 71°53'O</span>
+            </div>
+            <div class="sbody">
+              <h4>Pampa Linda – Cerro Volcánico</h4>
+              <div class="sstats">
+                <div><span class="sv">18 km</span><span class="sl">Distancia</span></div>
+                <div><span class="sv">+1185m</span><span class="sl">Ascenso</span></div>
+                <div><span class="sv">8–9 h</span><span class="sl">Duración</span></div>
+                <div><span class="sv">2035m</span><span class="sl">Alt. máx.</span></div>
+              </div>
+              <div class="stags"><span class="stag">Alta (Nov–Abr)</span><span class="stag">Muy Alta (May–Oct)</span><span class="stag">Guía recomendado</span></div>
+              <p class="sdesc">Sendero más exigente desde Pampa Linda, con acceso a la zona alta del volcán Tronador. Pedrero, nieve permanente y vientos fuertes en la parte superior. Salida temprana imprescindible.</p>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /diff-muyalta -->
+
+      <!-- EXTREMA -->
+      <div id="diff-extrema" class="dcontent">
+        <div class="diff-hdr"><span class="badge bg-extrema">🟣 Dificultad Extrema</span><h3>Guía de Alta Montaña OBLIGATORIO · Habilitado APN / AAGM</h3><p>Riesgos objetivos: glaciares, seracs, grietas, avalanchas. Requieren capacitación técnica especializada y equipo de alpinismo completo.</p></div>
+        <div class="sgrid">
+
+          <div class="scard">
+            <div class="smap"><div class="topo"></div>
+              <svg viewBox="0 0 400 158" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="ge1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8b008b" stop-opacity=".44"/><stop offset="100%" stop-color="#8b008b" stop-opacity=".04"/></linearGradient></defs>
+                <polygon points="0,140 40,128 80,108 120,80 162,50 200,30 240,24 265,27 300,48 360,88 400,112 400,158 0,158" fill="url(#ge1)"/>
+                <polyline points="0,140 40,128 80,108 120,80 162,50 200,30 240,24 265,27 300,48 360,88 400,112" fill="none" stroke="#8b008b" stroke-width="2.2" stroke-linejoin="round"/>
+                <!-- glacier -->
+                <polyline points="148,54 200,30 240,24 265,27 300,48" fill="none" stroke="rgba(246,250,248,.62)" stroke-width="7" stroke-linejoin="round"/>
+                <circle cx="240" cy="24" r="6" fill="#c4a35a"/>
+                <text x="240" y="13" text-anchor="middle" font-size="9" fill="rgba(196,163,90,.78)" font-family="'Barlow Condensed',sans-serif">▲ TRONADOR 3554m</text>
+                <text x="8" y="138" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">850m</text>
+              </svg>
+              <span class="mlbl s">📍 Pampa Linda</span><span class="mlbl e">🏁 Cima Tronador 3554m</span>
+              <span class="mcoords">41°09'S 71°53'O</span>
+            </div>
+            <div class="sbody">
+              <h4>Ascenso al Volcán Tronador – Cima Principal</h4>
+              <div class="sstats">
+                <div><span class="sv">25 km</span><span class="sl">Distancia</span></div>
+                <div><span class="sv">+2704m</span><span class="sl">Ascenso</span></div>
+                <div><span class="sv">2–3 días</span><span class="sl">Duración</span></div>
+                <div><span class="sv">3554m</span><span class="sl">Alt. máx.</span></div>
+              </div>
+              <div class="stags"><span class="stag">Dic–Feb (ventana)</span><span class="stag">Guía AAGM obligatorio</span><span class="stag">Crampones · Piolet · Cuerda</span></div>
+              <p class="sdesc">La cima más alta de la región. El ascenso cruza glaciares activos con grietas y seracs. Requiere equipo completo de alpinismo y Guía de Alta Montaña habilitado por la AAGM sin excepción.</p>
+            </div>
+          </div>
+
+          <div class="scard">
+            <div class="smap"><div class="topo"></div>
+              <svg viewBox="0 0 400 158" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="ge2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8b008b" stop-opacity=".42"/><stop offset="100%" stop-color="#8b008b" stop-opacity=".04"/></linearGradient></defs>
+                <polygon points="0,138 60,120 120,90 170,60 210,40 252,36 290,48 345,78 395,108 400,112 400,158 0,158" fill="url(#ge2)"/>
+                <polyline points="0,138 60,120 120,90 170,60 210,40 252,36 290,48 345,78 395,108 400,112" fill="none" stroke="#8b008b" stroke-width="2.2" stroke-linejoin="round"/>
+                <polyline points="195,42 252,36 290,48" fill="none" stroke="rgba(246,250,248,.52)" stroke-width="6" stroke-linejoin="round"/>
+                <circle cx="252" cy="36" r="5.5" fill="#c4a35a"/>
+                <text x="252" y="24" text-anchor="middle" font-size="9" fill="rgba(196,163,90,.75)" font-family="'Barlow Condensed',sans-serif">▲ Cerro Catedral 2405m</text>
+                <text x="8" y="136" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">1030m</text>
+              </svg>
+              <span class="mlbl s">📍 Base Catedral</span><span class="mlbl e">🏁 Cima Catedral 2405m</span>
+              <span class="mcoords">41°11'S 71°25'O</span>
+            </div>
+            <div class="sbody">
+              <h4>Ascenso Técnico Cerro Catedral – Aristas</h4>
+              <div class="sstats">
+                <div><span class="sv">12 km</span><span class="sl">Distancia</span></div>
+                <div><span class="sv">+1375m</span><span class="sl">Ascenso</span></div>
+                <div><span class="sv">1–2 días</span><span class="sl">Duración</span></div>
+                <div><span class="sv">2405m</span><span class="sl">Alt. máx.</span></div>
+              </div>
+              <div class="stags"><span class="stag">Dic–Mar</span><span class="stag">Guía AAGM obligatorio</span><span class="stag">Escalada roca / hielo</span></div>
+              <p class="sdesc">Las aristas del Cerro Catedral ofrecen las rutas de escalada más populares de la Patagonia. Requieren técnica en roca y/o hielo. Algunos sectores requieren rappel en el descenso.</p>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /diff-extrema -->
+    </div><!-- /act-senderos -->
+
+    <!-- ═ CAMINATAS CORTAS ═ -->
+    <div id="act-cortas" style="display:none;max-width:1300px;margin:0 auto;">
+      <div class="diff-hdr"><span class="badge bg-baja">🥾 Caminatas Cortas · Hasta 3 horas</span><h3>Accesibles · Todo el año · Sin equipamiento especial</h3><p>Perfectas para familias, principiantes o días con poco tiempo. La mayoría disponibles todo el año y sin necesidad de Registro APN.</p></div>
+      <div class="sgrid">
+
+        <div class="scard">
+          <div class="smap"><div class="topo"></div>
+            <svg viewBox="0 0 400 158" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="gcc1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5cb85c" stop-opacity=".38"/><stop offset="100%" stop-color="#5cb85c" stop-opacity=".04"/></linearGradient></defs>
+              <polygon points="0,132 80,127 160,108 220,88 260,90 320,102 400,116 400,158 0,158" fill="url(#gcc1)"/>
+              <polyline points="0,132 80,127 160,108 220,88 260,90 320,102 400,116" fill="none" stroke="#5cb85c" stroke-width="2.2" stroke-linejoin="round"/>
+              <circle cx="220" cy="88" r="5.5" fill="#c4a35a"/>
+              <text x="220" y="76" text-anchor="middle" font-size="9" fill="rgba(196,163,90,.72)" font-family="'Barlow Condensed',sans-serif">▲ Campanario 1085m</text>
+              <text x="8" y="130" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">830m</text>
+            </svg>
+            <span class="mlbl s">📍 Ruta 77</span><span class="mlbl e">🏁 Cima Campanario</span>
+            <span class="mcoords">41°03'S 71°30'O</span>
+          </div>
+          <div class="sbody">
+            <h4>Cerro Campanario – Vista Panorámica</h4>
+            <div class="sstats">
+              <div><span class="sv">2 km</span><span class="sl">Distancia</span></div>
+              <div><span class="sv">+255m</span><span class="sl">Ascenso</span></div>
+              <div><span class="sv">50 min</span><span class="sl">Duración</span></div>
+              <div><span class="sv">1085m</span><span class="sl">Alt. máx.</span></div>
+            </div>
+            <div class="stags"><span class="stag">Todo el año</span><span class="stag">Vista 360°</span><span class="stag">⭐ Imperdible</span></div>
+            <p class="sdesc">El sendero más emblemático de Bariloche. Cima con vista sobre los lagos Nahuel Huapi, Moreno y Gutiérrez y el volcán Tronador. Considerado uno de los 8 miradores más bellos del mundo.</p>
+          </div>
+        </div>
+
+        <div class="scard">
+          <div class="smap"><div class="topo"></div>
+            <svg viewBox="0 0 400 158" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="gcc2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5cb85c" stop-opacity=".36"/><stop offset="100%" stop-color="#5cb85c" stop-opacity=".04"/></linearGradient></defs>
+              <rect x="0" y="100" width="400" height="58" fill="rgba(20,55,80,.26)"/>
+              <polygon points="0,130 120,127 240,121 360,118 400,119 400,158 0,158" fill="url(#gcc2)"/>
+              <polyline points="0,130 120,127 240,121 360,118 400,119" fill="none" stroke="#5cb85c" stroke-width="2.2" stroke-linejoin="round"/>
+              <text x="8" y="128" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">762m</text>
+            </svg>
+            <span class="mlbl s">📍 P. Municipal Llao LLao</span><span class="mlbl e">🏁 Bosque Arrayanes</span>
+            <span class="mcoords">41°03'S 71°34'O</span>
+          </div>
+          <div class="sbody">
+            <h4>Sendero Arrayanes – Bosque único en el mundo</h4>
+            <div class="sstats">
+              <div><span class="sv">3.5 km</span><span class="sl">Distancia</span></div>
+              <div><span class="sv">+60m</span><span class="sl">Ascenso</span></div>
+              <div><span class="sv">1.5 h</span><span class="sl">Duración</span></div>
+              <div><span class="sv">820m</span><span class="sl">Alt. máx.</span></div>
+            </div>
+            <div class="stags"><span class="stag">Todo el año</span><span class="stag">Patrimonio natural</span><span class="stag">Cobro de acceso</span></div>
+            <p class="sdesc">El bosque de arrayanes más extenso del mundo. Pasarelas sobre el lago y árboles de corteza canela únicos. Se dice que inspiró la película de Bambi. Cobro de acceso al parque municipal.</p>
+          </div>
+        </div>
+
+        <div class="scard">
+          <div class="smap"><div class="topo"></div>
+            <svg viewBox="0 0 400 158" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="gcc3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5cb85c" stop-opacity=".38"/><stop offset="100%" stop-color="#5cb85c" stop-opacity=".04"/></linearGradient></defs>
+              <rect x="0" y="102" width="400" height="56" fill="rgba(20,55,80,.26)"/>
+              <polygon points="0,131 100,128 200,122 300,120 400,122 400,158 0,158" fill="url(#gcc3)"/>
+              <polyline points="0,131 100,128 200,122 300,120 400,122" fill="none" stroke="#5cb85c" stroke-width="2.2"/>
+              <text x="8" y="129" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">806m</text>
+            </svg>
+            <span class="mlbl s">📍 Los Rápidos – Lago Mascardi</span><span class="mlbl e">🏁 Lago Los Moscos</span>
+            <span class="mcoords">41°17'S 71°47'O</span>
+          </div>
+          <div class="sbody">
+            <h4>Los Rápidos – Lago Los Moscos</h4>
+            <div class="sstats">
+              <div><span class="sv">4 km</span><span class="sl">Distancia</span></div>
+              <div><span class="sv">+80m</span><span class="sl">Ascenso</span></div>
+              <div><span class="sv">1.5 h</span><span class="sl">Duración</span></div>
+              <div><span class="sv">815m</span><span class="sl">Alt. máx.</span></div>
+            </div>
+            <div class="stags"><span class="stag">Todo el año</span><span class="stag">Lago remoto</span><span class="stag">Vista Tronador</span></div>
+            <p class="sdesc">Sendero entre el lago Mascardi y el lago Los Moscos. Bosque de lengas y coihues, vista al volcán Tronador. Buenas chances de avistar fauna autóctona. Excelente opción para quienes visitan Pampa Linda.</p>
+          </div>
+        </div>
+
+        <div class="scard">
+          <div class="smap"><div class="topo"></div>
+            <svg viewBox="0 0 400 158" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="gcc4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5cb85c" stop-opacity=".38"/><stop offset="100%" stop-color="#5cb85c" stop-opacity=".04"/></linearGradient></defs>
+              <polygon points="0,133 100,129 200,112 280,90 320,92 370,108 400,118 400,158 0,158" fill="url(#gcc4)"/>
+              <polyline points="0,133 100,129 200,112 280,90 320,92 370,108 400,118" fill="none" stroke="#5cb85c" stroke-width="2.2" stroke-linejoin="round"/>
+              <circle cx="280" cy="90" r="5.5" fill="#c4a35a"/>
+              <text x="280" y="78" text-anchor="middle" font-size="9" fill="rgba(196,163,90,.72)" font-family="'Barlow Condensed',sans-serif">▲ Cascada</text>
+              <text x="8" y="131" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">750m</text>
+            </svg>
+            <span class="mlbl s">📍 Lago Gutiérrez</span><span class="mlbl e">🏁 Cascada Duendes</span>
+            <span class="mcoords">41°09'S 71°27'O</span>
+          </div>
+          <div class="sbody">
+            <h4>Lago Gutiérrez – Cascada de los Duendes</h4>
+            <div class="sstats">
+              <div><span class="sv">6 km</span><span class="sl">Distancia</span></div>
+              <div><span class="sv">+150m</span><span class="sl">Ascenso</span></div>
+              <div><span class="sv">2 h</span><span class="sl">Duración</span></div>
+              <div><span class="sv">900m</span><span class="sl">Alt. máx.</span></div>
+            </div>
+            <div class="stags"><span class="stag">Todo el año</span><span class="stag">Familia</span><span class="stag">Niños</span></div>
+            <p class="sdesc">Sendero suave ideal para familias con niños. Bosque nativo y una cascada de gran belleza. Bien señalizado con escasa pendiente. Sin Registro APN. Excelente opción para una mañana de senderismo.</p>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /act-cortas -->
+
+    <!-- ═ TRAVESÍAS ═ -->
+    <div id="act-travesias" style="display:none;" id="travesias">
+      <div class="diff-hdr" style="margin-bottom:2rem;"><span class="badge bg-alta">🏕️ Travesías de Varios Días</span><h3>Itinerarios completos · Conexión entre refugios</h3><p>Las travesías conectan refugios del Parque Nacional a través de filos, valles y glaciares. Requieren mayor experiencia, reserva previa en refugios y preparación logística detallada.</p></div>
+      <div class="tgrid">
+
+        <div class="tcard">
+          <div class="tmap"><div class="topo"></div>
+            <svg viewBox="0 0 460 172" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="gt1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e8872a" stop-opacity=".44"/><stop offset="100%" stop-color="#e8872a" stop-opacity=".04"/></linearGradient></defs>
+              <polygon points="0,145 60,130 110,100 160,70 205,64 245,80 285,58 325,53 368,70 410,92 445,120 460,132 460,172 0,172" fill="url(#gt1)"/>
+              <polyline points="0,145 60,130 110,100 160,70 205,64 245,80 285,58 325,53 368,70 410,92 445,120 460,132" fill="none" stroke="#e8872a" stroke-width="2.5" stroke-linejoin="round"/>
+              <!-- snow zone -->
+              <polyline points="270,60 325,53 368,70" fill="none" stroke="rgba(246,250,248,.42)" stroke-width="5"/>
+              <!-- refugios -->
+              <circle cx="205" cy="64" r="5.5" fill="#c4a35a"/>
+              <circle cx="325" cy="53" r="5.5" fill="#c4a35a"/>
+              <text x="205" y="52" text-anchor="middle" font-size="8" fill="rgba(196,163,90,.72)" font-family="'Barlow Condensed',sans-serif">Ref. Frey</text>
+              <text x="325" y="41" text-anchor="middle" font-size="8" fill="rgba(196,163,90,.72)" font-family="'Barlow Condensed',sans-serif">Ref. Jakob</text>
+              <!-- day splits -->
+              <line x1="153" y1="10" x2="153" y2="172" stroke="rgba(200,221,209,.06)" stroke-dasharray="3,5"/>
+              <line x1="306" y1="10" x2="306" y2="172" stroke="rgba(200,221,209,.06)" stroke-dasharray="3,5"/>
+              <text x="76" y="12" text-anchor="middle" font-size="8" fill="rgba(200,221,209,.28)" font-family="'Barlow Condensed',sans-serif">DÍA 1</text>
+              <text x="230" y="12" text-anchor="middle" font-size="8" fill="rgba(200,221,209,.28)" font-family="'Barlow Condensed',sans-serif">DÍA 2</text>
+              <text x="383" y="12" text-anchor="middle" font-size="8" fill="rgba(200,221,209,.28)" font-family="'Barlow Condensed',sans-serif">DÍA 3</text>
+              <text x="10" y="143" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">1030m</text>
+              <text x="10" y="57" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">1920m</text>
+            </svg>
+            <span class="mlbl s">📍 Base Catedral</span><span class="mlbl e">🏁 Base Catedral (circular)</span>
+            <span class="mcoords">41°11'S 71°25'O</span>
+          </div>
+          <div class="tbody">
+            <div class="tnum">01</div>
+            <span class="badge bg-alta" style="position:relative;">Alta – Muy Alta</span>
+            <h3>Travesía de los Refugios del Catedral</h3>
+            <p>Circuito clásico conectando los refugios Frey, Jakob y San Martín. Filos de montaña con vistas al volcán Tronador, el lago Nahuel Huapi y glaciares colgantes.</p>
+            <div class="tstats">
+              <div><span class="sv">45 km</span><span class="sl">Distancia</span></div>
+              <div><span class="sv">+2200m</span><span class="sl">Ascenso</span></div>
+              <div><span class="sv">3–4 días</span><span class="sl">Duración</span></div>
+              <div><span class="sv">1920m</span><span class="sl">Alt. máx.</span></div>
+            </div>
+            <div class="tpills"><span class="tpill">Dic – Marzo</span><span class="tpill">Reserva previa obligatoria</span><span class="tpill">Alta dificultad</span></div>
+          </div>
+        </div>
+
+        <div class="tcard">
+          <div class="tmap"><div class="topo"></div>
+            <svg viewBox="0 0 460 172" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="gt2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e8872a" stop-opacity=".42"/><stop offset="100%" stop-color="#e8872a" stop-opacity=".04"/></linearGradient></defs>
+              <polygon points="0,148 80,130 150,96 215,65 265,58 315,65 365,85 415,112 460,136 460,172 0,172" fill="url(#gt2)"/>
+              <polyline points="0,148 80,130 150,96 215,65 265,58 315,65 365,85 415,112 460,136" fill="none" stroke="#e8872a" stroke-width="2.5" stroke-linejoin="round"/>
+              <polyline points="200,68 265,58 315,65" fill="none" stroke="rgba(246,250,248,.4)" stroke-width="5"/>
+              <circle cx="265" cy="58" r="5.5" fill="#c4a35a"/>
+              <text x="265" y="46" text-anchor="middle" font-size="8" fill="rgba(196,163,90,.72)" font-family="'Barlow Condensed',sans-serif">▲ Paso P. Linda 1650m</text>
+              <line x1="153" y1="10" x2="153" y2="172" stroke="rgba(200,221,209,.06)" stroke-dasharray="3,5"/>
+              <line x1="306" y1="10" x2="306" y2="172" stroke="rgba(200,221,209,.06)" stroke-dasharray="3,5"/>
+              <text x="76" y="12" text-anchor="middle" font-size="8" fill="rgba(200,221,209,.28)" font-family="'Barlow Condensed',sans-serif">DÍA 1</text>
+              <text x="230" y="12" text-anchor="middle" font-size="8" fill="rgba(200,221,209,.28)" font-family="'Barlow Condensed',sans-serif">DÍA 2</text>
+              <text x="383" y="12" text-anchor="middle" font-size="8" fill="rgba(200,221,209,.28)" font-family="'Barlow Condensed',sans-serif">DÍA 3</text>
+              <text x="10" y="146" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">850m</text>
+              <text x="10" y="62" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">1650m</text>
+            </svg>
+            <span class="mlbl s">📍 Pampa Linda</span><span class="mlbl e">🏁 Bariloche / Lago Mascardi</span>
+            <span class="mcoords">41°19'S 71°52'O</span>
+          </div>
+          <div class="tbody">
+            <div class="tnum">02</div>
+            <span class="badge bg-alta" style="position:relative;">Alta</span>
+            <h3>Travesía Pampa Linda – Bariloche</h3>
+            <p>Una de las travesías más populares de la Patagonia. Transita el flanco del volcán Tronador, bosques de lengas y miradores sobre glaciares y lagos de montaña.</p>
+            <div class="tstats">
+              <div><span class="sv">38 km</span><span class="sl">Distancia</span></div>
+              <div><span class="sv">+1800m</span><span class="sl">Ascenso</span></div>
+              <div><span class="sv">3 días</span><span class="sl">Duración</span></div>
+              <div><span class="sv">1650m</span><span class="sl">Alt. máx.</span></div>
+            </div>
+            <div class="tpills"><span class="tpill">Nov – Abril</span><span class="tpill">Reserva en refugios</span><span class="tpill">Muy popular</span></div>
+          </div>
+        </div>
+
+        <div class="tcard">
+          <div class="tmap"><div class="topo"></div>
+            <svg viewBox="0 0 460 172" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="gt3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d9534f" stop-opacity=".44"/><stop offset="100%" stop-color="#d9534f" stop-opacity=".04"/></linearGradient></defs>
+              <!-- perfil invernal más irregular -->
+              <polygon points="0,145 60,124 110,90 160,56 200,42 240,46 285,40 330,46 375,70 420,100 460,126 460,172 0,172" fill="url(#gt3)"/>
+              <polyline points="0,145 60,124 110,90 160,56 200,42 240,46 285,40 330,46 375,70 420,100 460,126" fill="none" stroke="#d9534f" stroke-width="2.5" stroke-linejoin="round"/>
+              <!-- nieve extensa en invierno -->
+              <polyline points="95,95 160,56 200,42 285,40 330,46 375,70" fill="none" stroke="rgba(246,250,248,.58)" stroke-width="8" stroke-linejoin="round"/>
+              <circle cx="200" cy="42" r="5.5" fill="#c4a35a"/>
+              <circle cx="285" cy="40" r="5.5" fill="#c4a35a"/>
+              <text x="200" y="30" text-anchor="middle" font-size="8" fill="rgba(196,163,90,.72)" font-family="'Barlow Condensed',sans-serif">Ref. Frey</text>
+              <text x="285" y="28" text-anchor="middle" font-size="8" fill="rgba(196,163,90,.72)" font-family="'Barlow Condensed',sans-serif">Ref. Jakob</text>
+              <line x1="153" y1="10" x2="153" y2="172" stroke="rgba(200,221,209,.06)" stroke-dasharray="3,5"/>
+              <line x1="306" y1="10" x2="306" y2="172" stroke="rgba(200,221,209,.06)" stroke-dasharray="3,5"/>
+              <text x="76" y="12" text-anchor="middle" font-size="8" fill="rgba(200,221,209,.28)" font-family="'Barlow Condensed',sans-serif">DÍA 1</text>
+              <text x="230" y="12" text-anchor="middle" font-size="8" fill="rgba(200,221,209,.28)" font-family="'Barlow Condensed',sans-serif">DÍA 2</text>
+              <text x="383" y="12" text-anchor="middle" font-size="8" fill="rgba(200,221,209,.28)" font-family="'Barlow Condensed',sans-serif">DÍA 3</text>
+              <text x="10" y="143" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">1030m</text>
+              <text x="10" y="46" font-size="8" fill="rgba(200,221,209,.32)" font-family="'Barlow Condensed',sans-serif">1950m</text>
+            </svg>
+            <span class="mlbl s">📍 Base Catedral</span><span class="mlbl e">🏁 Base Catedral (circular)</span>
+            <span class="mcoords">41°11'S 71°25'O</span>
+          </div>
+          <div class="tbody">
+            <div class="tnum">03</div>
+            <span class="badge bg-muyalta" style="position:relative;">Muy Alta · Invierno</span>
+            <h3>Travesía Invernal con Raquetas de Nieve</h3>
+            <p>Los circuitos estivales transformados por la nieve. Paisaje de absoluta belleza en silencio invernal. Requieren raquetas, crampones, equipo de frío extremo y guía habilitado.</p>
+            <div class="tstats">
+              <div><span class="sv">35 km</span><span class="sl">Distancia</span></div>
+              <div><span class="sv">+2000m</span><span class="sl">Ascenso</span></div>
+              <div><span class="sv">3–4 días</span><span class="sl">Duración</span></div>
+              <div><span class="sv">1950m</span><span class="sl">Alt. máx.</span></div>
+            </div>
+            <div class="tpills"><span class="tpill">Jun – Agosto</span><span class="tpill">Raquetas + Crampones</span><span class="tpill">Guía obligatorio</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /act-travesias -->
+  </div>
+</section>
+
+<!-- ══ RECOMENDACIONES ══ -->
+<section class="s-reco" id="recomendaciones">
+  <div class="s-hdr">
+    <span class="s-lbl">Antes de salir</span>
+    <h2 class="s-title">Recomendaciones esenciales</h2>
+    <p class="s-sub">La planificación es fundamental para garantizar el disfrute, la seguridad y la conservación de la naturaleza en cada salida a la montaña.</p>
+  </div>
+  <div class="reco-grid">
+    <div class="reco-steps">
+      <div class="rstep"><div class="rnum">01</div><div class="rbody"><h4>Investigar el recorrido</h4><p>Verificar nivel de dificultad, estado del sendero y horas de luz disponibles. Reservar refugio o camping con anticipación si se pernocta. Calcular tiempo considerando desnivel y condiciones del terreno.</p></div></div>
+      <div class="rstep"><div class="rnum">02</div><div class="rbody"><h4>Chequear el clima extendido</h4><p>Las condiciones en la montaña son muy cambiantes. La temperatura varía significativamente con la altura. No salir con alerta de mal tiempo: el sendero puede estar cerrado y los riesgos aumentan considerablemente.</p></div></div>
+      <div class="rstep"><div class="rnum">03</div><div class="rbody"><h4>Completar el Registro de Trekking</h4><p>Obligatorio y gratuito. Facilita búsqueda y rescate en emergencias. No puede completarse con más de 48hs de anticipación. Un solo registro por grupo. En nahuelhuapi.gov.ar o barilochetrekking.com.</p></div></div>
+      <div class="rstep"><div class="rnum">04</div><div class="rbody"><h4>Armar la mochila correctamente</h4><p>Agua suficiente, comida, lentes de sol, gorra, ropa térmica, protector solar, abrigo e impermeable, mapa descargado, linterna, kit de primeros auxilios y bolsas para residuos.</p></div></div>
+      <div class="rstep"><div class="rnum">05</div><div class="rbody"><h4>Calzado y equipamiento adecuado</h4><p>Usar calzado de trekking, no zapatillas urbanas. Llevar el celular con batería completa. Anotar los números de emergencia: 103 (Municipio), 105 (Parques Nacionales) y 911.</p></div></div>
+      <div class="rstep"><div class="rnum">06</div><div class="rbody"><h4>Dejar un aviso antes de salir</h4><p>Avisar a familiar, amigo o alojamiento sobre los lugares a visitar, fecha y horario estimado de regreso. Salir lo más temprano posible para aprovechar las horas de luz.</p></div></div>
+    </div>
+    <div class="reco-vis">
+      <div class="rbox">
+        <h3>Durante el recorrido</h3>
+        <p>La seguridad en la montaña depende de tomar buenas decisiones en el momento preciso.</p>
+        <ul>
+          <li>Estar dispuesto a dar marcha atrás si las condiciones empeoran o hay demora</li>
+          <li>Seguir siempre los senderos señalizados. No tomar atajos en los zigzags</li>
+          <li>No transitar solo en lugares agrestes</li>
+          <li>Extrema precaución en ríos y lagos: corrientes heladas y peligrosas</li>
+          <li>Acampar solo en lugares habilitados. No ingresar a construcciones abandonadas</li>
+          <li>Traer toda la basura de regreso. Prohibido enterrarla o quemarla</li>
+          <li>Prohibido hacer fuego fuera de lugares habilitados</li>
+          <li>No alimentar ni tocar fauna silvestre. No llevarse nada de la naturaleza</li>
+          <li>Prohibido el ingreso de mascotas al Parque Nacional</li>
+          <li>Prohibido el uso de drones en jurisdicción del Parque Nacional</li>
+          <li>Para ir al baño: "pocito de gato" a más de 70 pasos de cursos de agua</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CHATBOT JHON (BOTPRESS + TELEGRAM) ══ -->
+<section class="s-chat" id="chatbot">
+  <div class="s-hdr">
+    <span class="s-lbl">Asistente Virtual</span>
+    <h2 class="s-title">Consultale a <em style="font-style:italic;color:var(--amber);">Jhon</em></h2>
+    <p class="s-sub">Nuestro asistente conoce todos los senderos con sus datos técnicos, recomendaciones y preguntas frecuentes. Preguntale lo que necesitás antes de salir a la montaña.</p>
+  </div>
+
+  <!-- Chips de sugerencias -->
+  <div style="max-width:900px;margin:0 auto 2.5rem;padding:0 1rem;">
+    <p style="font-family:'Barlow Condensed',sans-serif;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);margin-bottom:.9rem;text-align:center;">Podés preguntarle sobre:</p>
+    <div style="display:flex;gap:.45rem;flex-wrap:wrap;justify-content:center;">
+      <span class="chip" onclick="openJhon()">🥾 Senderos por dificultad</span>
+      <span class="chip" onclick="openJhon()">🎒 Equipo necesario</span>
+      <span class="chip" onclick="openJhon()">📋 Registro de trekking</span>
+      <span class="chip" onclick="openJhon()">❄️ Trekking invernal</span>
+      <span class="chip" onclick="openJhon()">🚨 Emergencias</span>
+      <span class="chip" onclick="openJhon()">🗺️ Travesías de varios días</span>
+    </div>
+  </div>
+
+  <!-- Dos canales: Web + Telegram -->
+  <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:1.8rem;padding:0 1rem;class="jhon-grid";">
+
+    <!-- Canal Web -->
+    <div class="chat-ui" style="display:flex;flex-direction:column;">
+      <div class="chat-hdr">
+        <div class="chat-av">💬</div>
+        <div class="chat-inf">
+          <h4>Desde la web</h4>
+          <p><span class="odot"></span>En línea · Sin salir del sitio</p>
+        </div>
+      </div>
+      <div style="padding:2rem 1.8rem;display:flex;flex-direction:column;align-items:center;gap:1.2rem;flex:1;justify-content:center;">
+        <p style="color:var(--glacier);font-size:.88rem;font-weight:300;line-height:1.7;text-align:center;">
+          Chateá con Jhon directamente desde esta página, sin instalar nada.
+        </p>
+        <button onclick="openJhon()" class="btn-p" style="font-size:.82rem;padding:.95rem 2.4rem;cursor:pointer;border:none;width:100%;text-align:center;">
+          💬 &nbsp;Abrir chat con Jhon
+        </button>
+        <p style="font-family:'Barlow Condensed',sans-serif;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,221,209,.25);">Disponible las 24 horas</p>
+      </div>
+    </div>
+
+    <!-- Canal Telegram -->
+    <div class="chat-ui" style="display:flex;flex-direction:column;">
+      <div class="chat-hdr" style="background:linear-gradient(135deg,rgba(36,97,160,.55),rgba(20,26,22,.85));">
+        <div class="chat-av" style="background:linear-gradient(135deg,#2AABEE,#229ED9);">✈️</div>
+        <div class="chat-inf">
+          <h4>Desde Telegram</h4>
+          <p><span class="odot" style="background:#2AABEE;"></span>En línea · Desde tu celular</p>
+        </div>
+      </div>
+      <div style="padding:1.6rem 1.8rem;display:flex;flex-direction:column;align-items:center;gap:1rem;flex:1;justify-content:center;">
+        <p style="color:var(--glacier);font-size:.88rem;font-weight:300;line-height:1.7;text-align:center;">
+          Escaneá el QR o buscá el bot en Telegram para chatear desde tu celular, incluso sin conexión web.
+        </p>
+        <!-- QR de Telegram -->
+        <div style="background:#fff;border-radius:10px;padding:10px;display:inline-block;box-shadow:0 8px 32px rgba(0,0,0,.4);">
+          <img src="https://files.bpcontent.cloud/2026/03/28/19/20260328194041-DAFCNX3F.js" 
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+               style="display:none;">
+          <!-- QR embebido como imagen local (base64 placeholder - reemplazar con la imagen real) -->
+          <img 
+            src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAIpAagDASIAAhEBAxEB/8QAHAABAAIDAQEBAAAAAAAAAAAAAAUHBAYIAgMB/8QAXBAAAQMDAQQDBxAGBgcGBgMBAQACAwQFEQYHEiExE0FRYXGBkZKxwRQVFyIyMzZDU1VydJOhstEIFkJzs9IjNTdSVJQkNGaDpOHjYnWCosLwJSY4VsPxJ0Rko//EABsBAQACAwEBAAAAAAAAAAAAAAAEBQIDBgEH/8QAPREAAQQBAgIHBgIJBAMBAAAAAQACAwQRBSESMQYTFEFRYXEigZGhscHR4RUjMjM0UmJy8BYkNVMlgpJC/9oADAMBAAIRAxEAPwDrVEREREREREREREREREREREREREREREREREREREREREREREWDdrvb7XHv1tSyMkZazm53eA4rJjHPPC0ZKYys5Folx2gDeLbfQ5HU+d3/AKR+ah5tbX2Q5bPDF3GRD05VpHotp4yQB6n8MrYInFWmiqqPWd/acuq2P7jom+gKSodf1bCBWUUMre2Mlh+/K9folpo2wfQ/jhDE5WGihbLqa03UiOGfopjyil9q497qPgU0qySJ8TuF4wVgQRzRERa14iIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiItP2jakNrpRb6OTdrJ25c4c42dvfPV/wDpb61d9iQRs5legZOF41lrJlC99Ba3NkqRwkl5tjPYO0/cFXVRUzVEzpp5XyyOOXOe7JKxC/JySvzfXc06EVVmGDfvPipDQG8lkb/dTf7qx99N9TMLLKyN/upv91Y++m+mEysjf7q3DSetZqN7KS6vdPTHgJTxfH3+0ff5lo++m+o9ipHYZwSDKxODzXQMMkc0TJYntfG8BzXNOQR2r2qv2b6ldR1bLTWSE00zsQuJ97eervHz+FWguHvU31JeB3LuPio7hgoiIoa8REREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREXxramKjo5quc7sULC957gGVQl4uU1zudRXTn28zy7GfcjqHgGArS2t1xpNJuhaSHVUzYuHZxcfw48KprfXXdHqwETpjzO3uH+fJbGbLI6ROkWPvpvrosLPKyOkTpF86VvTVMUJduCR4bvdmTjKsxuyumc4NbquEuJwAKYZP/AP0UWxbhrY604z5E/RecQVb9InSKypdk8MTg2XVEbCRnDqUD/wDItH1lZmafvJt8dc2taI2v6VrN0cc8MZPnWFe/XsO4Y3ZPofuF6HZUb0idIsffTfU3CZWQJCDkK7tB3g3nTkM8jt6eL+imPWXDr8IwVRO+rA2LV5bda23uJ3ZYRK0d1px5nfcqfXKwlql/e3f8Vi7cK1ERFw61IiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiL1EwyPDR1oi8jicBeuik+Tf4lIxRMjbho49Z6yvaIozopfk3+SU6KX5N/klSaIijOil+Tf5JTopfk3+SVJoiKM6KX5N/klOil+Tf5JUmiIozopfk3+SU6KX5N/klSaIijOil+Tf5JTopfk3+SVJoiKM6KX5N/klOil+Tf5JUmiIozopfk3+SU6KX5N/klSaIijOil+Tf5JTopfk3+SVJoiKoNuz3xU9picHND3yuwRzwGfmqt31bv6RELjbLRVD3Mc0kZ77mg/+kqmt8rvtDwaTMef1KyBWRvpvrH3ym+Vb4XuVkb6mNEOzrGzj/8A2xfjC1/fKmdDPP652b69F+MLVOP1TvQrF59krc9vrsaso/qLf4j1Xe+t/wD0gnY1dRfUG/xHquN8qHpI/wBnH6LNxWRvpvrH3ym+VY4XmVkb62vZNK79eaKNuT0jJWkAc/aOPoWmb5W77EInT6/pnjlBDLIe9u7v/qUPUQBUkz/KfohKu/opfk3+SU6KX5N/klSaL5ssFGdFL8m/ySnRS/Jv8kqTREUZ0Uvyb/JKdFL8m/ySpNERRnRS/Jv8kp0Uvyb/ACSpNERRnRS/Jv8AJKdFL8m/ySpNERRnRS/Jv8kp0Uvyb/JKk0RFGdFL8m/ySnRS/Jv8kqTREUZ0Uvyb/JKdFL8m/wAkqTREUZ0Uvyb/ACSvLmub7ppHfClUIBGCAQiKJRZFXAIzvt9yersWOiIiIiIsq3j2z3dgAWKsu3fGeD0oiy0RERERERERERERERERERERERERERERERERERaftitbrpoKtEbd6WlxUsH0fdf+UuXN2+uwJGNkjdG9ocxwIc0jIIPUuWtounpdL6oqbeWn1M89LSuP7UZPDwjke8uv6NWgWurnnzH3RQm+m+sff7qb/dXV4XmVkb6kNNXCK26ht9wna90VNUxyvDAC4hrgTjJHFQ+/3U3+6sXMDmlp714dxhbttU1Tb9VX2nr7dDUxRRUohcJ2tDshzjwwTw9sFqO+sff7qb/dWuCu2CMRs5BZF2Vkb6b6x9/upv8AdW7C8ysjfVw/o6Wx3/xO9Pb7U7tNE7t/af8A+hU7QU9RXVsNFSRulnneI42Dm5xOAF1Xo2yRad03R2mLDjCz+leP25Dxc7x58GFz/SG0Iq/VDm76BMqXREXCr1ERERERERERERERERERERERERERERERERfOoGYHg9mVGqTn95f9E+ZRiIiIiIiy7d8Z4PSsRZdu+M8HpRFloiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiLVtpWkKfV1iNNlkVdBl9LMR7l3W0/wDZPX4D1LaUW2GZ8MgkYcEIuOLrRVlquE1vuED6ephduyRvHEH0ju9axd9dTbQdC2nWFGBUg09dG3ENWwe2b3HD9pvc8RC531nonUOlJ3C40bn0ucMq4QXRO7OP7J7hwvoOm6vDdaGk4f4fh/mVgdlA76b6+G+m+rjCxyvvvpvr4b6b6YTK+++v0OJOBklZNgst3v1aKO0UE9XKcZ3G+1b3XO5NHdKvvZlsqo9PyRXS9ujrrm320bBxigPaM+6d3Ty6h1quv6lBSb7Zy7uHf+S9G6x9iWgZLRE3UN5h3a+Vn+jQvHGBh5uPY4jq6h3ScWoiL53btyW5TLJzPy8lsRERRkREREREREREREREREREREREREREREREREXif3l/0T5lGKTn95f9E+ZRiIiIiIiy7d8Z4PSsRZdu+M8HpRFloiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiLzIxkkbo5GNexww5rhkEdhC9IiLSNQbK9F3h7pTbDQzO5vo39H/5eLfuWpVmwW3OeTR6iq4W9Qlp2yHxgtVyIrGHVrsIwyQ+/f65XnCFSsGwOna4dPqeV7esMow0/e8rZLLsZ0bQObJVR1lyeDnFRNhue8wD78qxkWUms3pBh0h92B9MJwhY1toKG20raW30cFJA3lHDGGN8QWSiKtJLjkr1ERF4iIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIi8T+8v8AonzKMUnP7y/6J8yjERERERFl274zwelYiy7d8Z4PSiLLRERERERERFoO1rVMlppG2yifu1U49u4c2N/NSalV9qURM5laLNhleMyP5BZ+qdf2iySup481lS3gWRng090rTKnaxeS8+pqCga3q6RjyfucFXjnOe4ucS5x4knrUhZbJdLxIWW+jlnx7pzW8G98rt4tEo1o8yjPiSuSk1a3O/EZx5Bbb7K+ov8FavspP509lfUX+CtX2Un86w2bNNUubnoKYdwzAL99jPVPyNL9uFh1ejf0/FZceqf1fBZfsr6i/wVq+yk/nX63avqHPtqK147kcn86w/Yz1T8jS/bhYVy0JqWgiMslAZWt4noTv48SybDo7zgcPxXjpdTaMni+C3KzbV4nyNZdaARgnjJDnA8ByVYlruFHc6NtXRTtmidyLTy7hXMjmlri1wII4EFbDoXUtTp+7MfvudSvIEseeBHaO6o2odHonML6+x8O4qRS1qRrw2fcePguhEXzppo6iBk8Tg5j2hzSOsLzXVVPRUslVVStihjGXOccABcVwknhxuuq4hjPcvpK9scbpHe5aCT3gqnve1W4R18kdroqM07XENdO1zi7u8HBSeq9pNrdbJ6W1CWaeRpYHubutbnr7qqBdboujAhz7TPQFc3quqEEMrv8AXC372V9Rf4K1fZSfzp7K+ov8FavspP51oKyLbRVVxrI6SjhdLNIcNa0K8dpVFoyYxhVI1G2TgPKtHSG0upuF1iobtS00YmdusfA1wwTyzklWaqn0Xs5uVPd4K67GOKOFweGMdkkjl3uKthcZrLagmHZeWN8cl1OlmyYj2jn3Z5oiIqhWS+FwqoqGimrJziKFhe49wKpa/avd/VL/AFFQUDYM+16Vj3Ox3SHBWzc6SOvt89FNno5mFjsdhVN12y/UMdS9tKaaaLPtXGQNJHeV/oraB4u1Yz3Z5Km1V1wcPZ8478L6javqHIzRWvHXiKT+dWNoTUseprW6o6IRTxENlYOQJ6x4lVw2ZapJGYqUDt6cKzNnmmnaatL4ZpBJUTuDpC3kMch96k6u3TRB+oxxeSj6Y6+Zv12eHzU5d66K2Wyevn97hZvOVYU21esdc2ia30woy7Htd7pAO/nH3Kzb3QR3S01NvlJDJ2bpI6lU9LstvHrk1k08ApQ/jIDxI7yi6Q2gY39q592fDy81J1J1wPb2fl/nNXBTTMqKaKojOWSsD2nuEZC1faFq8aZhijhgZNVTDLA/O6B2nCyLlqnT+nDDbKqqIfFG1ga0bxaAABns4KI1xp+LWtupblZ6qN8jAQwk+1c3PLuHKi06zGztfZaRGe88vJSLU73RObAQXju+qbPteSagrzb66mihqCC6MxAhrscSMElb2q82b6FrLHczcrlJH0rWlsbGHOMjBJKsNY6qKwsHs37Pyz5LLTjOYB1/7X2QnAyVpWptototMrqemaa2dvAhhw0Hv9aitr+qpKRoslBLuyvbmd7TxA7FUZJJJJyT1q30jQmzsE0/I8gqzUtXdE8xQ8xzKsOfaxey89BQW5rf+2x5P3OC+Xsr6i/wVq+yk/nWrWTT13vJzb6KSVgOC/HtR4VOt2aapcM9BTDvzBXElXSYTwvDQfMqrZY1KUcTC4j0WZ7K+ov8FavspP509lfUX+CtX2Un86xPYz1T8jS/bhPYz1T8jS/bha+r0b+n4rZx6p/V8FmN2r6g3vbUVrI7kcn86nbHtVpppGxXWj6DJ4yRZ3R4OJWjXXROo7bEZZ6Bz428XOi9sAO7ha4eBwVtGl6daZ+rA9QVq/SN6u72yfeF0/QVlNXUrKmkmZNE8Za5pyF91QuznVM9iu0cEshdRTuDXtJ9yTyIV8xua9jXsILXAEEdYXH6npzqMvCdweRXT0LzbcfFyI5hfqIirVPREREXif3l/wBE+ZRik5/eX/RPmUYiIiIiIsu3fGeD0rEWXbvjPB6URZaIiIiIiIi562jVj6zWVxc856KZ0I7zSR6F0KubtYfC28fX5/4jl0/RdoM7z4D7qg6QOIiaPNZOhbBJqG+R0vEQM9vM4dTf/wB4V/22gpLdSMpaOFsUTBgABV1sGhZ6kuVRgb4kazPcxlWLda2K326etmOGQsLj3e4tGv2ZJrfUDkMDHmVt0aBkVbrTzPf5LIJA5kDvr832f32+Nc96o1Zdb5VyPkqXx0+faRNOAB1eFQXSy/KP8oqVF0Xe5oL5MHwxn7hR5OkDA4hjMj1x9l1EHtPJzfGv04IwVzDS11ZSyiWnqZY3jiHNccq4tlerZr3FJb7g7eqoRlr/AO+381E1DQZKkfWtdxAc+5SaWsx2X9WW4J5LF2saSp57fJeqCEMqIQXTBo4Pb298Kn11DWwsqKSWB4BbI0tIK5hqBieQDqcfOrno3bfNE6N5zw8vQqr1ys2KVsjRji+yvnZTVvq9F0pecmImId4YWFtqkfHo5u44jeqmNd3Rhy/di3wKb9Zk9C87a43v0a3caTu1THHuDDlSMaG6vju4/urZzi7TM/0qkV+ZX4v3C+gLjUyrD2FRsk1BWvc0FzKbLT2HeAVeBWNsH/r64fVR+IKs1k/7GT0+6n6WP92z1VwoiL5qu6RERERfm83ON4Z7MrB1DUzUdjraqmbvTRQucwdpAXPHr1dfXP1d6tn9U72d7e45Vvpukuvtc4OxhVt/Um03NaW5yulkWBp2pnrLFRVVS3dmlha547CVnqqe0scWnuVg1wc0OHeiIixWS5+1/aLnSanq3VEMj2zyl8b8ZDgTkAd7krN2Q26utumn+rmuj6aTfjY7gWt/98VubmNd7prT3wqz223SvpBR0NNI+KnlYXPLeG8cngukbek1RjKQAHifTyVE6pHp7nWsk+XqrNBB5EFFTWxq63D9YvW8yySUsjHFzXHIaQCQfuVyqp1Gi6lN1ROe9WVK2LcXWAYXNurKt9dqOuqXnJdKR4uHoUps402NQ3rdnB9SQYdNjr7B4cLX7n/WVV++f+Iq3dhsDG6bqakAb76ksJ7gDfzXb6nYNSjmPY4AC5KhCLNzD+W5K3uipaejp2U9NE2KNgw1rQvqSBzIHfWBqK6Q2az1FwmGWxNyG/3j1BUFqHU12vVU+WqqnhhPtY2nDWhcjp2lS6gS7OAO9dLe1GOkA3GT4LovfZ/fb41+hzTycD4Vy70svyj/ACivvRXGuophNS1UsT28QWuVseixxtL8vzVcOkQzvH8/yXThAIwQCD1FVbtd0jCymdfLdEI90/6Qxo4YP7Xjwth2Yapk1Bbnw1hHqynxvH++O1bFqOFlRYa6J4BaYHHj3Bn0Knrvm024GnmDg+YVpM2K/WyO8beRXMw4HK6L0BWPrtHW6pecuMZbn6Li30LnRX/sm/s/tn+9/ivXR9J2jszXf1fYqj0Anr3Dy+4W0oiLh11iIiIi8T+8v+ifMoxSc/vL/onzKMREREREWXbvjPB6ViLLt3xng9KIstERERERERc3aw+Ft4+vz/xHLpFc3aw+Ft4+vz/xHLqei/72T0H1XPdIf3bPVWRsG/qm5/v2/hWxbVCW6EuJBwcM/G1a7sG/qm5/v2/hWxbU2ufoW4hoycM/G1Rbf/Mf+zfspFb/AIz/ANT91QCIi75cbhFuexoka3iAPAwyZ8S0vK3TYyCdbROA4CGTJ8Cgan/By+hU3T/4mP1CvJ3uT3ly7VH/AEmX6Z866id7k95cu1X+sy/TPnXP9Fucvu+6uukPKP3/AGV27FfgUPrMnoW4V1JT11JJS1UTZYZBhzXDIK0/Yr8Cm/WZPQtuuVbTW6ikrKuURQxjLnFUWo8XbpOHnxK3o47Izi5YVfas2a2xlsnqrS6WKeNpeGOdlrsdXcVQ8Vfdp11p69VZt0cksb5QWt6RoAd3BxWl6j2X3FlVNPapoZYCS5sbyQ4dwcF0el6jJATFecQe7P4qjv0WSgSVBkd+FW6sfYN/X1w+qj8QVe1dPNS1ElPURmOWNxa5p5ghWDsG/r64fVR+IKz1gg0ZCPD7hQNMGLbM+KuJERfOF3CIiIi/HAOaWuGQeYWsfqFpn1w9W+ovb729ub3tM95bQi3RWJYc9W4jPgtckMcmONoOFV+udoVbarzJbLTDC1tOd17ntzk9gC2rZ5qY6ltL5pYxHUQuDZQ3kc8j9y13XGzqe7XiS422oiY6Y70rJCQM9oIUrYqO2bPtOvfcKoOklcC8tHFzuOAB41d2G0ZKbGQDMhx6578qphNtllzpTiPf08luaLQztU04D7xX/Zt/mWTbdpOna2rZTj1TAXnAdKwBufASq12l3GjJjKnDUKxOA8LXdY7Sa+jvU1FaoohFA8sc6RuS4jn3uK2Owz23X+mw650jS+J+68A+5d2g95Qerdm01xu8lfaqmFsc7t97ZCRgnmRjmtx0Tp2LTdoFGyTpJHnflfjGXKzty0WVWOrbSDHLn55UCtHbfYcJ92HPp5YX005pm0WDfNupyx7+DnuOXEdmVMoioJJXyu4nnJVwyNsbeFgwFzDc/wCsqr98/wDEVcew/wCCE31x/wCFqpy6H/4nVfvn/iKuPYf8EJfrj/wtXddIP4AeoXI6L/Ge4r77ZyRop+DjNRGPOqNV5bZ2l2iZMDOJ4yfvVGZTo3/Bn1P2TXR/uvcF+r8JX4i6BUysHYWT+s9U3PD1IT/5mq3bz/VFZ9Xf+Eqo9hbXfrNVPx7X1IRn/wATVbl5/qis+rv/AAlcFr3/ACHwXY6P/B/Fcwq/tk39n1s/3v8AFeqBV/bJf7PrZ/vf4r1d9J/4Rv8AcPoVV6D/ABDv7fuFtSIi4RdaiIiIvE/vL/onzKMUnP7y/wCifMoxERERERZdu+M8HpWIsu3fGeD0oiy0RERERERFzdrD4W3j6/P/ABHLpFc97SqJ9FrK4NcMCWV0w7ocSfSun6LuAne3xH3VB0gaTC0+a3XYNOz1NcqbI3y9smO5jHpVj3Gkir6GajnGY5WFp8K570Xf5tPXuOsZl0TvazN/vN/98V0BaLpQ3WjZVUM7JWOGeB4juELTr9WSG1145Hv81t0awyWv1J5ju8lReqtF3ezVjwymfUU2faSRjPDujnlQPrfX/wCBqfsnfkunkW+LpPK1oD2AnxzhaZNAjc7LX4HouZqWz3WplEUFvqXPPIdGR51cWy/SElhp31tdj1ZOAN0fsDs763dCQ0EkgAcyVEv67Nbj6oN4QefmpNPSI6z+sJyV8a+dlLRTVEhAbGwuJPYFzBUHenkcOtxP3q2NrGsKdtFJZLbMJJJBid7TwaOzKqRXnRym+GF0jxji+gVVrdlssgY054VeWxX4Et+syehZ20611d20pLT0TS6VjxJuDm4AHh96/NldG+j0ZSNeMGXMuO/hbSuYtWDHfdKzudn5q+rw8dNsbu8LnvSenLxWX+mjZSTRCOQOe9zcBoCv99TTskEb54mvP7JeAfEv2qc5lNK9nF7WEt7+FzVd7hcKi7TVNVPMKnpCTlxyw55DsVs1r9deXOIaGj15qvJbpLMD2i73cluu17TtcNQOudLSvlp52tyYxndcBjipfYpYq6hkq7lVwOhZLGI2NdwJ4g5W3bPaqsrdJUU9fvGYtIy7mQDgHxKfUOzqkza5pOA22z6KTBp8ZmFoE7749UREVGrVfOaeGEZmmjjHa9wHnXy9cKD/AB1N9q381Su16ur5dVz0s8kjaeIARMzhpGOeO/laV4V1FXo4JoWyOkxkZ5fmqGxrRikLAzOPNdP+uFB/jqb7Vv5r1HWUcjg2Orge48g2QErl5fWkqJ6aoZLTyvjkactcx2Ctx6LtxtJ8vzWoa8c7s+f5LqNV7tnstwuVFS1dFG6VtPvCSNvPj1/d963LTk9RU2GiqKsETyQtdICMccKQXOVp30rAe3ctP5K6nhbahLDsCuYTb68HBoqn7J35LKtVju1dWxQQUNRvOcOJYQB3eK6URX7ulDyNox8fyVONAZnd/wAlj2yF9Nbqane7efFCxjj2kABfaR7I2l0j2saOZccBelVm3K5VcNRRW6KZ8cMkZkeGnG8ckcVRUqrrtgR5xlW9qwKsJfjOFaEU0Uzd6KVkg7WuBXtUnsaudXFqqO3iZ5p6hj95hOQCGk5+5XYstSomjN1ROdsrGjbFuLrAMdy5gun9Z1X75/4ird2GVDHadqaUEb7KgvI7hAHoVYavon0Gpa6meCC2Unx8fSs7Z9qM6cvQmk3nUsuGzNHZ2+BdvqNc3KOI+eAQuUozCrby/luCr1v1tgu9qnt9R7iZpGew9qobUWkL1Z6t8b6SSaEH2ksY3g4edX/bq6kuFMypo52TRuGQWlZC4/T9Um08luMjvBXTXdPiugOzg+IXMPrfX/4Kp+yd+S+9FY7vWTCGnt9Q55PWwjzrpdFanpS/G0Y+P5KuHR5md3/Jals20sdO21z6ndNZPgvx+yOxTupZ2U1grppCA1sDgSe6MelZ73NY0ue4NaOZJwAqn2t6whqYjZLbMJGZ/wBIkaeBx+z4/MqmtHPqVwOO+TknwCsp3xUa3CPDZVgr+2S/2fWz/e/xXqgeJIA4krozQVG6g0hbqV4w4RlxH0nF3pXSdKHAVmN7+L7H8VS6C09e53l9wpxERcMuqREREXif3l/0T5lGKTn95f8ARPmUYiIiIiIsu3fGeD0rEWXbvjPB6URZaIiIiIiIi0batpV96oW19G0GrpxxaOb29nfW8opFWy+tKJWcwtNiBk8ZjfyK5ZkY+N7o5GuY5pwQRghZdsulwtkvSUNXLAesNcQD3x1q89U6Hs19cZnsNNUH42LhnvjktMqNklZvn1PdYN3q6Rpz9wXbQ69TnZiXbxBC5WXSLUL8x7+YWvM2iasY0NFxbgdsDD6F++yNq35xZ9gz8lN+xJdPnWj8ly/PYkunzrReS78lj2nR/wCn/wCfyWQg1P8Aq+P5qG9kbVvziz7Bn5KPumsNRXGMx1Nyk3TzEYDM+LC2n2JLp860Xku/Jfo2SXPPtrrR47jXfkvW3NIYct4QfT8l46tqLhh2fj+argkkkk5J6ytn0Bpap1BdGF8bmUUZBlkIwD3B3VvFm2U0MErZLlWPqcHjGzg0+lWDQUdLQUzaakhZDE0cGtGFF1DpDGGFlfcnv8FIp6M8uDpth4L6QxshibFG0NYwYAA5BQuub6dPafkr2sD5C4Rxg8t455+JTq0Tbh8DY/rjPwuXMUI2zWWMfuCVfW3mOBzm8wFq2mtpV5deYorm6OamleGkBgaW57MKxq7SGnq64er6i3xunzvEgkAntIHArnWN5ZI17eDmkEHuqz7ZtXMFrZDV298tUxgaHtcN1xHWeK6bU9Mka5r6Qx3HGypKN1haW2TnvGd1nbSNa1thuLbPZmxwmJjS524DjI4ADlyUnsu1fVaiZPS17W+qYG7++0Y3m5xyVN3y51F3uk9wqT/SSuzgdQ6gt62C/wBfXD6qPxBLmmQwaeSWjjAG/n3r2tdlkuDB9knl5K3a2dtLRz1LxlsMbpD3gMql6raffzc3SwGFtMH8ISwHI7+Mq3tR/B65fVJfwFcyqJ0fqQzte6VueXNSNXsSxFoYcLoQW2y6zslHca6ia/pY8tIJa4ccYyOPNVbtN0pDpurhlo3uNLUZDWuOS0jmPvCtTZl8BLV+6P4ivrrbTcGpbWKWSQxSRneik7CotS+6lcMZcerBIx5LdYqNs1w4D2yAcrn60UclyudNQxEB88gY0nqyrxsWz7T1tEUr6Y1NQzBL5HEgn6PJROkdnkVguQu1xro5ug9swNGGt7pyvnfdqlBCZYLbSSTvGQ2R3Bp9KsL9ue/II6RJaOeNuah1K8VRhfZAyeXesDXm0C50F8mt1pMcMdM7cc4sDi4jnz6ltuzbU0upLVK+pY1tTTuDZN3k7OcH7lQ1bVS1lXLVTu3pZXFzj2kqe0NqmfTNc+VsfTQSjEkfb2Ed1TLeiRmnwRNHGMb+Pio1fU3izxSO9kq99QXFlps1VcZBvNgZvY7TyVQ020+/C5NlmMLqYu4xBg4Dv801xtBffrd630lK6mgecyF5Bc7ucOpaGsNJ0VrIT2lg4j8gvdR1NzpB1DtguoqGoZV0UFUz3M0bZB3iMqpdvP8AXlu+rH8RX5o/aULZbIqC5Ukk7YhuskjIzu9We8tqv9ntu0Gz09fQVXRys4McRy7WuCrK1d+l3BJMMM3GfVTp5m6hVLIj7Wxwq92QfDyi+hJ+Aq+VpOgtCM07WurqmpbUVOC1m6MNaCt2UTXLcdqzxxnIAx9VI0qs+vBwvGCTlV1tc0pJcIReKCPfqIm4lY0cXN7e+qecHNcWuBBHMFdTLUdT6Ast6kdOxrqSoPEvi5Hvjkp+ka6K7BDPyHI+CiajpJmd1sXPvCpW1Xm52uTfoayWH/sh3tT4OSnG7RNWNaGi4swO2Bh9C2CfZJXb39Bdafd/7bXZ+4L5+xJdPnWi8l35K5kv6VMeJ5aT5j8lWMp6hGMMBHofzUJ7I2rfnFn2DPyT2RtW/OLPsGfkpv2JLr860Xku/JPYkuvzrReS78lh2nRvBv8A8/ks+o1P+r4/mtTuurL/AHNhZV3GUtPMM9oD4lBHiVZLdkdz3vbXWkx3Gu/JTli2WW2llbNcal9WWnPRjg0+lbf0zp1dn6sj0AWA025M72x7yVpuzPSc96ubKyojcyhgcHFxHuyOQCvVrQ1oa0AADAA6l86WngpYGwU8TIo2DDWtGAF9Vx2p6i+9LxnYDkF0lKm2rHwjcnmUREVcpqIiIi8T+8v+ifMoxSc/vL/onzKMREREREWXbvjPB6ViLLt3xng9KIstERERERERY9XXUVHj1XWU9Pnl0sgbnxrIXPe0meuk1fcGVjn4ZM4RNPLcyd3HgwrPS9PF6UsLsYGVBv3DVjDgM5V6evtk+eLf/mWfmnr7ZPni3/5ln5rmZFff6Yj/AOw/BVP6df8AyD4rpj19snzxb/8AMs/Nfvr7ZPni3/5ln5rmZfmV5/piP/sPwXo1t/8AIPiumvX2yfPFv/zLPzWXS1NNVR9JTVEU7P70bw4eMLlpWFsQnrv1ilhY6Q0hiJkHUD1d5RbugNrwula/OPEKRW1Z0soYW81dCxau5W6kfuVVfSwO7JZmtP3lZR5Fcz6nnrpr5Vm4OeZxKQ4O6lW6XpwvPcC7ACm3bZrNBAzldD+vtk+eLf8A5ln5qG2hW06m0m+G2TRTvZIJWbjwQ4gEYz4Vz8rB2K3iWn1A+3TVBEE8ZLWuPDfBGMeMq1m0Y0m9oifkt33ChR6h2k9VI3AdstSksF8Y8sdaK/I7Kd5HmXyls14iYXyWqvY0c3Op3AD7l04vx7WvaWvaHNPMEZWI6TSd8Y+K9/QrP5lytnuLb9lV/pbFqB76125DUR9EX49zxyF8tqlqZa9Wzthh6OCYCRmBwJI448K1RdEeru1t+TgqsNdWmyOYK6ZkqaC82yppqKtp5umhcz+jkDiN4Eccd9URV6O1BDdXULbdO87+614blhHUd7ksTSF0ntWoKOoimdGzpWtk48N0nBz4F0lE9ssTZGEFrgCCOsFc290miO4We013j4hWwYzUW5fsQo3SdufadOUVukIL4Y8OI7SSfSpKR7I2F8j2sY0ZLnHAC9KvtuE1bFp+mFM57YXykTFvgxn71SwRG5ZDScFxVjK8V4SQOQX32lastUGnaqhpa2KepqGGNoieHbueskKj8oTnmi73T6LKUZY05yuUuWXWX8ThhF9Io5ZpBHFG+R55Na3JPgXzKtXYbaI3x1d1ngDnAhkLnDv5x4gtt64KkBlIzhaq1Y2JRGFWVVSVVK4NqqaaBx5CSMtz418Vfe1agpanRtbUSRMMtO0PY7HEHIHpVCdS16Xf7dEX4wQcL2/T7LJw5zlZVDb66udijo55+OCY4y4DxK8NldjrLJp9zK4bss7+k3M+4GMYUnoi301BpmgbTxNb0kDJHEDiS5oJ86m1yuray60DC1uG595wr7TtMbARKTk4RYMl5s8byyS60LHDmHVDAR96iNptbPb9GVtRTPLJPasyOxzgD51z69znuLnuLieZJyvNK0YXozI52ADhZahqZqvDA3J5rpht7sznBrbvQOJ5AVDPzWc0hzQ5pBB5ELlkEg5BwVd+xu7Or9NupZ5+knppCACckMwMfflZ6nofY4etY7I79lhR1XtMnVubhbwSAMk4CxqevoaiUxQVtPLIObGShxHgBWrbXbq63aWdFDN0c9Q8MGDglvXj7lS1puFTb7nDWQTPbIx4Oc8++sNO0R1yAy8WPBZ3NUFaUR4z4rptfKqqaelj6SpqIoGf3pHho8ZX5Q1EVXSRVMLw+ORoc0g8CFT22+eu/WGKF7pBSdEDGOQJ4ZUHTqJuWOpJx+Sl3LXZ4esAyrX9fbJ88W//ADLPzX3pLhQVji2kraaoI5iKVrseIrl9Smla+poL/RTU8rmHpmtIB4EE49K6CXou1rCWyb+iqY9bc5wDmbLpVERceuhREREREREXif3l/wBE+ZRik5/eX/RPmUYiIiIiIsu3fGeD0rEWXbvjPB6URZaIiIiIiIijLtYLNdnh9xt8NQ4ci7IP3KTRZMe5hy04Kxcxrxhwytd/UfSfzJT+N35p+o+k/mSn8bvzWxLHuNZBQUUtZUvDIom7zipAt2ScB7viVqNeADJYPgFrF52e6bqqCWOloGUk26Sx8ZPA9XPKoiriNPVSwE5Mb3MJ7xwrM1FtWM1PNTWqhMZcC0TSPzwPXjHNVe97pJHSPOXOJJPaSuw0eK3E13aCfLJyVQ3zBI4dUPgrB2S6SoL4youFyb0sMT+jbFnAJwDx8asDUctv0Xpeoq7ZRQwuGGsaBzceAz1qotDawq9MTyBkQnppeL4icce0FZGutcVepomUwgFNSsO9uZySe6VFtUrNi57ZzHt37Y9FIrzRRV8NHtrJsm0e/wAN3jlrqr1RTOf7eIgYA7itm6aZsN7AqKy3xSSPaD0gyCubs4KsrS+1KWgoYaO50RqejG6JWP3TjujBymp6e/LZKgwRzxssqk4wWzHI891qmvLIzT+oprfG5zosB8Zdz3TyUHDLJDK2WJ7mPactc04IV46g07atfW2mu1FUmCUtw2TGeHY4doVX600hcNMSRmd7Z4JODZWtwM9hHUpVHUmStEUh9vkQVqnplji5o9leWa21VGwMZeqgAchhv5L6wa91XFK17rvLIAc7r2twfuWssBc4NaMknACsfTuyytrKaGquFa2ma8BxiDMuwe7ngVssmlA3MrQM+SRtnecNJ+K3+y+tustM0ldcqCKUvBBDhycOBx4VXG1rSVFYTT11uaY4J3bjo+Ya7GeC3e+aos2haWms8FM+d7GDEbXYwO0nHMr9pq6y7R7DNSFj4ZIzktJ9tGeog9YXPVZZq0nXgERZ+XorGaNkreA441RCm6DVmoqCnbT0l2qIom8A3gceMKe1bs3uNloJK6nqWVkMfF4azdc0dvPitFXURzQW2ZGHD/PFVLopITjkVsg11qwH+u6g+Bv5KzNmmoH6stdVQXiGOofDjecRwe08s93gVX+jNBXHUdL6s6dlJTZw17m7xd3hkKx6Wns2zfTz5pXvmlldxPJ0h7B2BU2puqOb1MLR1mdsBTKrZgeN59nzUXtH0NZoLBU3K204pZqdpkcGn2rh181Ty3vWu0Wovtvfb6Sk9SQP98JfvOcOzqWhq10mOxHDiwd8+qgXzE+TMQ2VxbONDWeewU9yuVOKqWoaHta4+1aOrkrEo6Wno6dtPSwsiiaMNa0cAqV0TtEqLFb22+qpfVdOz3sh265o7OtWzpXUFFqK2+rKPLcHD2O5tK5nV69xsjny5Lc7eH5K3oSVy0NZs7HvWJtLGdC3UD5IfiC54HNdRXCkhrqKWkqG70Urd1wVeUuyikiujZ5Lg99K1+8Itz22Own/AJKXompwVIXslODnPyUXVKMtiRrmDyW9aa+Dts+qRfgCkFo2odoVpsFaLXBSvqjAAx24/dDMDlyOcLZtN3ujv1sZXUTjuHg5p5tPYVS2Kk7G9c5pDSrKGxE49U12SFCbYPgHWfTi/GFQqvrbB8Aq36cX4wqEXXdGv4Q/3H6Bc9rY/wBwPT7lMhZdsuVdbZ+noKmSnk/vNKxEXQOaHDBGQqhuQchZl0udwucwmuFVJUPAwC48lhhEAyQBzK9a1rRhowF6cuOSpmzapvtpY2Oir5WRNPvZwWq6NOyUOs9L09XdKGKUnLXNI4bw547i0DTey+ur6SGsrqxtKyQB3RbmXY7+eCtqx2yls9sht9I0iKIYGeZPaVxuuW6jsdR+2DzG3zXSaXXnbnrf2SORVS7WdI0NkiguNtYYoZH9G+PmAcEjHiWjWbjeKLA//sM/EF0dqSzUl9tUlBVg7juLXDm09oWnad2Z0VpuQuNbXeqWQkvY0N3QMdZ7Vv0/XY21CydxLhnHn4LC1pjjOHRj2forDRV9X7VLRTXN1LHRzTRMfuumD8DhzIGOK3m21lPcKGGtpXh8Mrd5pXM2KViu0OlaQDyVzHPHISGHOFkIiKKtyIiIi8T+8v8AonzKMUnP7y/6J8yjERERERFl274zwelYiy7d8Z4PSiLLREREREREREREWrbVyW6CuRBwcM/G1bStc2l0s1bom409OwvkLGuAHYHAn7gpNMgWIyfEfVapxmNw8iudlnW+zXW4QuloqCoqI2+6cxmQFi09PNUVLKeKNzpHuDQ0DjkldMacoIrdZKSjjiDNyJu8AOvGT967HU9S7G0cIySqWrT60nPJcySMfE90cjS17TggjiF4JW97cKSCl1ZG+FgYZ6cSPwObt4j0BaGpVeyJomyeK9dX4HFq/VKWjT16uzQ+gt88zCcb7W+1HhWDbqSevrYqSnY58krg1oA6yunbTSQ2+2wUsLGxsiYGgDhhQNS1I1AA0ZJUmCqH81A6PpYdIaSgp7vVwwO3i97nOwAT1fctF2v6ttt3o4bXbZBUNbJ0j5W8gQMADxqL2zXb1dqo0sM+/BTMDcA8A79rzBaMotGiC4WpD7R3wpMhOOBvJZNs/rKlB+WZ5wupwAAABgBcq0D2x10EjjhrZWknuArqOjq4KqkjqoZGuikYHBwPUVG1/JLD6/ZZVmcOVRO2Vx/X2rBPARxY8gKY2Ak+vtxGeHqUHH/iC13arWQV2uK2aneHsAYzI7WtAP3hbDsB/r+4/VR+MKZOcabg/wAo+y1tj/XZ81b1ypm1tuqKR3ATROjz2ZGFQtXs/wBTR3N1LHb3yR7+Gyj3GOo5XQSKgpahJUyGd6kSwNlxlRmlbZ6z6fo7cSC6GPDiOs5z6VAbV9O1l/s0PqAb89M8uEf94HGfMtyQ8Oa0RWXxzdcOecrJ0TXM4DyXODtHapBI9Yq096Mp+p+qfmKu+yK6OBB5EFfquh0jnH/4HzUA6ZGe8rnEaO1QSB6xVo78RVubKNO1lgs83q8bk9S8OMf90DOPOtyRRbuszW4urcAAttehHC/jByUJwMla7fdZWG1wzb9wiknYCBEx2XZ7MLL1l6r/AFXuHqHe9UdEdzd58+P3ZXNkm8HHfzvZ455rbo+lx3QXvdsDyWu/dfXw1o5rIuNS6tuFTVuGDNK6THZkkq29gxJsVwBPKpGPJCpsK49gn9RXH6yPwhdDrwAokDy+qp9LB7UCfNTO2D4BVv04vxhUKr62wfAKt+nF+MKhPAtfRr+EP9x+gWesjM49PxX6vvQUVZXziCip5J5TyawZKxyrd2Emg9basDc9W9J7bPPcxw+/KtNQtmpAZQM4UKpWE8oYThV+NIao+Yq77IqS05oPUFZdIWVdvmpIA4F75W44dxX2i5V/Saw5pAaB8VeM0aFpySSvxjQxgaBgAYWNcbhQ26Hpq6qip4843pHYCylR+26qmk1d6lc8mKKFpY3PAZHFVmmUe3T9WTgc1Pt2Ozx8QGVaf64aX+faH7UKF1hryw09lqI6Guiq6iVhYxsTsgZ4cT1Kil+LqoujNdjw4uJx6KpOpyuGMBfpJJyV0FskJds9thJyf6X+K9c9roPZH/Z5bP8Ae/xnr3pR/CN/uH0Ky0tuJT6fgtrREXBq9REREXif3l/0T5lGKTn95f8ARPmUYiIiIiIsu3fGeD0rEWXbvjPB6URZaIiIiIiIiIiIq92waouFjjpaK3SdDLUNL3SDmAOGAoPZXrK7Vl/ZablUvq46gO3XSHLmkAnn4F8/0gP63tf7h/4lreyU/wD8gW3vv/A5dRBXhOnFxaM4JUBxf1/PZXvT2W009YayG3U0dQTkyNYA7xrPRFzLnOdzOVOAA5Kk9vfwppPqY/G5axoGzw33U9Nb6hxbE7Ln45kDmFs2334U0f1MfjctEtFxqrVcYq+jk3JonZaervFddULjSa1pwcLT1WXZXSdp07ZbSQ+gt0EMjRjfawbx8KpHVmuL9cLnUMirpqWnDi1sUbiBju9q3HTG1dtXWw0l2omwNkIaZmOyAe0jqCkb/sutN1r311PWy0fSnecxsYcMns48FUVyKspNobnkea3Fio9zi5xc4kk8SSvzKuD2HKP58n+wH5rStfaKqtLPjl6b1TSSHDZMYIPYQreLUYJXcLTuvWxNK1RSFLe7tS0jqSnuNTFTu5xteQ0+BRy/MqSSHc91n1K9ZJOTzVl/o/8AwguP1UfjCrLKsz9H74QXH6qPxhRdQdms9YmLh3V0L8e5rGlz3BrQMknqX6qn2zaukjebBb5d3h/pL2nj9HxedcxWrusSBjV4s/We0+moJH0dlYKmdpw6V3uGnudqru5a41NXPLn3WeIH9mJxa3xLWsouvrUK8IwG5PiVEk4j3qcp9VaigeHR3isB/enitt03tTulNMyO7xtqoORe0YeO73VW4X6pMlOvMMPaFFJew5BXUNivFBeqFtXQTiSN3MdbT2ELPXN2idR1WnbuyoicXQOIE0eeDh+a6KoKqGto4quneHxStDmkdYK5HUtPNN+27TyU6CbrBvzX3PEYK16+6PsN1hm6W3wsneD/AErGgOz25UzcauGgoZqyoduxRN3nFVzS7WaaS6NhktzmUjn7ol3vbAdpH/Na6Ve0/L6+dvBeTviHsyd6qq50xorjU0jiSYZXR5PXgkK29ggIsNwJBwakY8kKQ1Ds9s+oK0XSGpfTGcB7txuQ/I58+C2bTdlorDbWUNEwhg4ucebj2lXOpavDZqdW3PEcZ8sKBUovin4zyUFth+AVb9OL8YVBq/NsPwCrfpxfjCoI95WXRr+EP9x+gUXVW5mHp+K/V96GtqqGcT0dRJBKOT2OwVv+l9l81ytkdZX1xpOlG81jGbxx3c4Ut7EFJ89z/YD81Ll1qi0lj3fIn7LQzT5yA4BV9+t2p/n2v+2KktOa71BRXSF9VcZ6uAuAeyZ5dkdxfmvNE1WmWx1DZxU0jzu7+MEHuhajkggjmpEcVO3FxMaCD5LwmeF+HE5HmurGOD2BwOQRkKh9tLgdczYOcQRj7lkWfaheKC1sopKaKpdG3dZK52CB3eHFabeLjVXW4TV9Y/fmldlx6u8O4qnRtInp2XSSYxjA81YXLTJow1vNTuzSw0+oNSCmqiegijMr2j9oAgY+9Wfq3QVhnsVQ6ioY6WohjL2PjbjOB19q0rYN8K6r6m78TVdb2texzHAFrhgg9YULXL08N4BjiAAFvpQMdDuOa5SPA4PMLoPZGC3Z7awRg/0v8V6ia/ZXZqm5uqmVU0MT37zoWtyOPPBzwW826jp7fQw0VKwMhibutaF5rmrwXa7Y4s5zk+Wx/FZ1KzonklZCIi5dT0RERF4n95f9E+ZRik5/eX/RPmUYiIiIiIsu3fGeD0rEWXbvjPB6URZaIiIiIiIii7tqGy2mVsVxuENPI7k12SfuUouade1EtRrK7uleXFlZLG3J5Na8gDxKw0+m208hxwAsHuI5K1Np+m5dWUNJcrLLHUPhaQGh3u2njw7qidl+h7la7yLzeGClFOHbjHOGSSMEnqxglfTYPeIhSVdqnqGteHh8LXOxw68eErd9fw1k+kLhFQb3TmP2u6eJGRn7sqRJPNBmpn2eWfIoGAni719abVGn6mu9QwXSB9RnG5x59/GFMLle3UtdJdIYaaGX1T0rd0BpyDn7l1Db2yNoKds2elETQ/PbgZUe9UZXI4TnK2ubwqmNvx/+aqP6mPxuVc5VobfbfVOu1HcWxOdB0HRFwGcEOJ4+NVarmk8dnbhS4YuJuV6a4ggg8Qr40ttI0/UWmEXKsFHUsaGva9pIJHWMAqhMolmBlgAO7lvNUOC6R/X/AEf8+QeQ/wDJY+raSi1xpSSC0VsMzmvEkbgeG8AeB6xzXO2VaWwOmuDbrV1G7I2iMWHZ4Bz8jHf4ZVdLTZXb1jHbhapKojbxg8lq8mz/AFex5aLNK8DrD24P3r5T6H1ZBE6WWyztY0ZJ3mnzFdJItf6Wl8AtHaD4Lkt7XMeWPaWuacEEcQVZf6PvwguP1QfjCitslmkoNWzVUVOW01S0Pa5reG9gb335U/8Ao/2+qjrbhcJInsgdCImucMZO8DwU+zOJKpd4hSJGgxcSti41ApLfUVTuUMTpPECVy3dat9bcqmrkcXOlkLsk93gulNZhx0rcgzn6mf8AhK5gytWjAAOco0UfECV7UpZNP3e8TCOgoZZcn3WMNHhK3nZ1aNCyQQ1FdcGT1p4uimJa1h7Owrbr9rS2WnctWnaaOtrXndjhgaAxp7uOCmS6g8O4ImEnz2C1vYM4wtcsOyynidE6/XBu+84EER913M81IbT9P2KyaIeaO3wxydK1jZN0F/HPXzW06YstVG/11vc5qbjIM4/YhHY0ch31qu3yq6O0UNJn32Qux9HH5qBDZmntsaX5GfctDmDB2VN5V4bDrk6r01LRPcS6kkAGex2cD7lRqtn9H8OPro4e5yzPfwVday0OqOJ7sKNEwterJ1HbhdrHV24v3Onj3c9h5+hUtSbNtSOuraeWnayAP9tPve1x3Ov7lfKLmqepTVGubHyK3TV2SkFyhKm92LTtLT0NfcooXRRNYA7JJAAHUCsX9fNI/PcHkP8AyVL7Q6evg1ZXur2yZfKSxzuRZn2uD3sLXcq+g0CCWMPc8knfbH4KI+5I04AXRN4da9aabq6C218U2+AQRng4HIyDxxlVfa9m2oZbsyCrpxDTB/t5S4YLevHWvnsYnkj1xTwseQyWOQPAPPDSQr6USeebR3mCI5B337u77LJsTLYD3jcKErdQ2Cxtjoq65wwPjYGhpBJ4DHUFi/r5pH57g8h/5KjtY09dT6jrRXtkEplJ3nA8R1ce8obKnw9HK8jA5zySfDH4LW67IDgAKy9rGs7deaCO1Wxxmj3w98uMDhyAVar8ys2yW+pudygpKaJ0jpHgcBy76vqtaKjDwN5DfdQ5C6Z/EeayqDTV9r6M1lJbJ5YBx3xgedRUrHxyOjkYWPacFpGCCup6KnipaSKmhYGRxtDWtAwAFSG2i0S0mqHVsVO4U9SwO3mt4b3XlVema4blgxOaAO5SpaQjaCFkbBvhZVfU3fiartVObBrfVC8VdxdE5sAgMQcRgElwPDxK3a9sjqGdsPCQxODO/jgqDpAQ+8QD3BTareGNRtVqiwUtd6inukDKjONzJ59/GFLsc17Q9jg5pGQRyK5audNXR3SaGphl9U9K4OBack5+9dEbPoayDRtuir971QIzvbx4gFxLfuwvdW0iOlCyRj85/wAyPJbI5C47hTyIioVtREREXif3l/0T5lGKTn95f9E+ZRiIiIiIiy7d8Z4PSsRZdu+M8HpRFloiIiIiIiLmTW7XN1jeQ4EZr5yM9nSOXTa07V2z20agrHVrpJaWocPbOix7Y9pBVjp1pld5L+RXoA71z/FNLDIJIZHxvHJzXEEeFWLsh1Zcv1hitNbVyVFPUggdK7eLSBnmePUtU1xpuo0xd/UU0gljeN6KQftBQtHUzUdVHU00hjlicHNcOoq7mDLMW2+VNZAHN2XVMdBQxTmeOipmSnm9sTQ7x4WQqPpdr98igbHJQUUzgMF7t4E+Ir7M2x3feG/aaHd68F+fOqB1Gfv+qw7FMe5XNUQQ1EZjnhjlYebXtDh4isP1jsvzPb/8sz8ljaO1BTaksrLjTtLCTuyMP7LuxffU14p7FZp7nVAlkQ4NHNx6go2Htdw960cLw7g7169Y7L8z2/8AyzPyT1jsvzPb/wDLM/JVNNtkuvSu6G00W5n2u8XZ+4r8i2yXXpB0tpotzPHdLs+dSeyz/wCFTP0fZ8Pmra9Y7L8z2/8AyzPyUDtLujtMaPfPa4oqd8kgiZuMADSQTnHLqU1pW9U+oLLDc6Zpa2TgWnm09YWp7e/gTH9dj/C5aogTKGu8VpgYTO1j/FUzJf73I8vdd67J7Kh4HnXqn1FfYJmysu9cXNORvTucPESopFe4b4LpDXb4LpTQ9ezU+kaOvuNNDM92WuD2BwJacE4PeWxQQwwRiOCJkTByaxoAHgC07Yp/Z7RfvJfxlboufm2e4DllcvOOGRzRyBK+VbA2qo5qZ/uZY3MPeIwuW7/QyWy81dDKwsdFKQAezq+7C6pVa7YdGvukPrzbYt6qibiWNo4vaOvv/kpmnWBE/hdyK2VZA13C7vVJqT0zeaiw3iG5UzGPkj/ZeMgg8wox7XMeWPaWuBwQeYX5ldHs4YPIqdJCujtGa2tWo4WsbIKerA9tC84Pg7VXe3iubNqKmo2uDhBFvHuF3/6VcwyywyCSGR8bxyc12CF6qKiaplMtRK+WQ83PcSSo1bTmQz9a07eCgPgwV5BV87FbW6g0r6qlYWyVj9/B/uj3PnVZbOdI1OormySSN7KCI5kkIwHdwdq6EgijghZDEwMjYN1rRyAUfWbgLRA33qKWAFRurrk+0aarrjGAXwR7zc9uQPSqDpdY6ghura83Kdzt/ecwu9oR1jd5K7NqHwBu37kfiC5yyt2gwxvheXNzvj5LTMCTsun6WKgvlppauqpKefpoWv8Abxh2MgEgZVJ7WbHRWPUbWUIDIp4+k6MH3BzheNMbQr1Yrf6hibFURN9x0ucs72Fr1+u9beri+urpeklf4mjsCk6bp1irYJLvYWubD24xuti2PPa3X1EXOAG5IP8AyFdArlShq56KqjqqaQxzRODmuHUQrAptrl7ihaySgopXAcXu3gT4ivNZ0ue1KJIt9sLyBwjbgq4qqgoatwdVUVNORyMkTXH7wvj6yWb5ooP8sz8lVDNsF13xv2qi3evBdnzq0NJ3yn1DZYrjTtLA47r2H9lw5hUNqhbpsDpNh5FSGua47L7+slm+aKD/ACzPyX0hoKCjDpaWhpYXBp4xxNafuCy0PEYKrzK87ElZ4C501BrG/Vl6lqm109OGvO5ExxaGjPLHX4Vcug686k0jTVd0p4ppCS12/GCHEdeCo687NLDcrq6vLpoC928+OMjdcfQtutlDTW2hioqOIRQRN3WtCvdTv1Jq7GQNw4eWMeS0xxuaSSVrO0y6S6b0mX2qKOB8kgiaY2ABmQTnHgVVaL1ffaTUVNv1s9THPKGSRyOLgQT1Z5eBXxerZR3e3SUNdEJIZBgjrHdC1jTuzix2a5Nr2umqZGHMYlxhh8HpXun6hThqPjmblxz3c/es3MJdlbXLQUMs4nloqZ8o5PdE0u8eFkIi58uJ5lbEREXiIiIiLxP7y/6J8yjFJz+8v+ifMoxERERERZdu+M8HpWIsu3fGeD0oiy0RERERERFAak1fYbBL0NwrN2YjPRsaXO8OOSn1zHryaSbWd4Mji4trpmDJ5APcAFMp12zuIdyCkV4etdgrO2k6nZqe9NqYIzHTwt3It7mR1lavGx8kjY42l73HDWgZJK8raNlEMc+vrbHK0ObvPOD3GOIV0SIY8N5AK5bEIoyfAL70uzbV1TA2aO3MDXDID5mtPiJX2Zsu1gXAOooGg8z6oYcfeug1+Pc1jS57g1o5kqoOoSnwVcNRlHIBabpuntuz3SrIrtXMY6R5fIRxy7gMNHM8ML6XOaz7QNMVVBbK9ricEZGC1w5Eg8cKsNtd7guupWQUk4lgpYww7py0vySSPGFg7JbzDZ9XwSVUwip5mmN5JwATyJXvUEt63Ptc1NbQe6LtGTx81lTbLNXtlc2OkgkaDwd07BnwZX5Fst1e6QNfRwMaebvVDDj710DFJHLGJIntew8QWnIKSSMjYXyODWjmScALX26XyUb9LTjbA+H5rUbO607PtK09HdK9jXZLnEcS5x54HPCrnatrqk1HTw262NeaVj+kdI9pBc4cBgHvlRu2C8w3fV0hpZxLTwMEbS05bkcyPuWmKTDCNpHc1b0tOG08n7R3X6i/EUviVr1a6H2J/wBnlF+8l/GVui0rYn/Z5RfvJfxlbqqSf9471XEXBiw/1KIiLUoy0nWWzq035zqmn/0KrPEvYPauPdH5KuLnss1NSvPqZkNXGP2myBv3E5V+opkN+aIYByPNSGWpGDHNc8U2zbVszw31Axg6y6Vox963DTWyRsUzJ73ViUDj0MXAHuE/krXRbZNUncMA49F4+w9yx7fRUtBSspaOBkMLBhrWhZCIq8kk5K0LWtqHwBu37kfiC5wXTWuqGa56SuNDTjelliw0duCD6FzRUwzU0zoaiJ8UjTgtcMELq+j7h1Tm9+fssgziC85WfZLTcLzV+pbdTPnkxk45Ad09Sj8q5P0fYozaLlPujpOnDN7rxugq2vWjVrmUDJWsxLT/AGMtYEf6hD/mGfmsK8aF1NaqN1VV2/8AomjLjHIH4HbgLo1eZo2SxPikaHMeC1wPWCudZ0jshw4mjHv/ABWPVNXJyvTYOc6Mm+uP/C1VHqqzVtqvtTSTU0jcyExndOHAnhjtV0bHbZVWvR7Y6uN0Uk0zpg1wwQCAOPiVvr0zH0gQeZGEazhOVuaIvMoJicG8yDhcQtigLprTTltuHqCruDWzg4Ia0uDT3SOSnqeaKohZNBI2SN4y1zTkEd9cxaitlzo77UU1bDKagyHiWn2/HmO1Xzsuoq2g0ZSQV7Xtm4uDXc2tPIK/1PSoKldkrH5J+fmEwthraqno6Z9TVStihjGXOccALU5Npuj2PLTXykg44U7yPMvzbFQV9fpB7KBr3ujkD5GM4lzcHq6+pc+va5ji1zS0jmCpGi6NXuwmSRxznkFm1uV0NTbSdI1E7YWXB7XOOAXwuaPGQttikZLG2SNwexwy1wOQQuTYYpZ5WxQxuke44DWjJK6X2f0lZQ6Ot1LX73qhkZ3g7mAXEgeIha9b0iCixronHJPI/VHM4VOoiLnFgiIiIvE/vL/onzKMUnP7y/6J8yjERERERFl274zwelYiy7d8Z4PSiLLREREREREXL2tvhle/+8J/4jl1CuXdbH/5zvf/AHhUfxHKx044c5Wmlt4nuURlbVskkbHtAtjnnA3njP8A4HLVMr3TTy007J4JHRyRuDmuHMFWEntNI8VfOg42FviF1s9wa0uccADJK5q1xqW53a/Vbn1kohZI5kbGuIAAOFl120jVFXbTQSVMTWObuuexhD3DrycrTySTkkklQa8BjJLlG07TXQOLpMZ7kJJOSSSUymV+eFSsq7DFkNra1ow2rnA7BIUNdWuGDV1BHdkK+A5q5NLbJbbNaoZ7zUVJnkbvFkLw0Nz1cQcrVJI2MZK0WbENUB0neqb4rcNkdjp75qtsdZF0lPDGZXNPIkEYB8asr2ItK/K3L7dv8qzayCx7N9M1FbQ0rnOc4NBe7LpHccAnHfUd9kOHC3mVWz6tHMwxwA8R2CztZaastbpyqjko4YujiLmPa3BYQuacrcNTbRdQXykko5ZIoKd/BzYmkEjsJytPW2uxzAeIqZpdOavGRKefyXQ+xP8As8ov3kv4yvG2a819n0u11A90b55ejdI3m0Yz/wAl72J/2eUX7yX8ZW03i2UV3oJKGvhbNBIOLT51Bc4NmJPiuYme2O85zxkBx+q5Zdca9zi51bUknn/SlfSlu90pZ2zwV9QyRpyD0hPnVna72XUVFaJ7jZZpg6Fpe+KVwdlo54IAxwVSK4hkZKMhdNDLDZZxM5LqLRFxlu+lLfcZ8dLNFl3fBI9CmVrGyr+z60fuj+Ny2dUcoAeQPFcdO0NlcB4lEWPc6yG32+etqDiKBhe89wKn/ZfuPrtveoYPUO97jjv4+l/yW2CrJPksHJexV3yglo5KI2rahu0urquk9UywwUzyyNjDgcOtb/sRvNfdbDUxV0jpfU0jWxyO5kHPDwYUlctKab1jDTXieGUOmjDhJE4NLgeWeBWDqu8W7Z1YYKK1UjelmJ6Nrjzxzc7t6vGrF80diFteNnt/5lbnOa9gjaN1vijrxZbbdKSWnqqOF4e0jO6Mg9uVomzraPUXy7Ntd1giZNL70+IYBPYQrMVfNDLUkw7YqM9jozgrlO707aO7VlIwktgnfGCexriPQrd/R8e31luUefbeqQcdzdCqjU/wmun1yb8ZX103qC56fqzU22fcc4Yc1wy1w7oXbW6zrdTq2nc4Uh0eQugtoNyqrTpOtraMf0zWhrTjlk4z4MqhLTqW9Ul4jrY66d8pkBcC7Ifx4jHdVo7PtcnVc8tkvVLCZJYzgsGGvGOIx3sqbt2zrTFDcm18VNK97XbzWPeCxp6sDCpKs0WmNfDZZlx9+QtGOHZy2WCOKqpoZ54I3PdG1x3mg4JGVkgADAGAqi1RtVrKS8SUtppYDTwu3C6QEl2OeOWFYei7/DqOxR3GJhjJJZIzOd1w5j71V2dOsQRCWQYafksSwgZKmkRFXrFfOSngkfvvhje4dbmglfRFX+03X0um6tlut8EclWW77nScWtB5cOtSatWW3IIoxkrJrS44CsAgEYIyFjmhoicmjpyf3YVHey3qn5O3fYO/mT2W9U/J277B38yuR0avjlj4rZ1D1eTaOja4ObSQNI6xGF91RdLtd1E2dpqaehkiz7ZrIi0kd/JVy6dukF6stNdKcERztyAeogkEeMFQL+l2aQDpuR88rF8bmc1noiKsWtEREReJ/eX/AET5lGKTn95f9E+ZRiIiIiIiy7d8Z4PSsRZdu+M8HpRFloiIiIiIiKpNfbMbhcb5PcrNLCRUvMkjJXbuHE5PHvlW2i2RSujOWrfBYfA7iYqB9ibVnZQ/b/8AJQGqNJXvTYY65U7RG84bJG7ebnsyunVr20W0SXvSVZRQMDpy0OjHdBB9CksuPLhxclaVtXlMjRJjBXMnWtp05oHUd9om1lHTRsgd7h8z93e73BRtv07eKy6stzKCcTF4a4FvuePEldN2ilFFa6WkAA6KJrDjtA4rdPPwAcKtdS1A1WtEeCSqK9ibVv8Adoft/wDkv32JdW9lD9v/AMlfyKL2qRVH6dteXwVJ6c2S3cXOKS8S0zKVjg54ifvFw7O4t+ve0HTNjqzQVFRLJLF7VwhZvbp7DxW3HkVzBq+xXW2XypirKeUkyEtfukh47QsmHr3e2VIqf+VlPaHchsBsri9lrSX96u+w/wCar7alruLU0cNDQRPZRxu33OfwL3dXDq5laN6mqfkJfIKepqn/AA8vkFSGQMachXVfSKteQSN5jxK+SZXt8csYy+J7R3WkLxzW5Wq6H2Jf2eUX7yX8ZW1Xa40dqoZK2umbDBGMucStV2J/2eUX7yX8ZUR+kLI9mm6BjXENfVEOHb7UlVxZxzFvmuDkgE+oOjPe4qP13tRt1XZ6i32WOV752mN0kjd0Bp547eCp9Fk0VBWVsrYqWmlle84aGtzlW0MbYhgLqYakVRhazkujNlX9n1o/dH8blM3u7UNmoH1twnbDC3rPWewLB0VRPs2krdb6tzWSwxYdk44kk+laztvtVfddPU01vY6ZtPI50jGcSQccfBhVLWtknwTsSuO4GTWiCdiTute2ibS6C6WWa1WeOU9ONySSQbuG9YAVUL6upalpINPKCOftCvvQWu4V1SympqOaSRxwAGFdNWijgbhvJX7II4G8LeS6P2dfAazfVGeZV3+kT/r1n/dS+dqs7S9L60abt9vqZGNkggbG7LusBaLt1sdbc6ShuVFEZ2Uwc14ZxIDsHPe4KloPaLocTtk/dUEBHaM926rvZaf/AJ/tH74/hK6TVBbINP3Go1bS3E00kdPSOL3PcMAnBGPvV9CWIv3BIwu7N4ZW7XHB04x3BLuOs2VSa62Y3CrvE9wsz4nMncZHRyO3SHHnjt4qsLtbqy1V0lFXQuhnjPtmuXVqpL9IKNjNRUD2twX0xLj2+2IVhoupyyyiB+4x9EglLjwlaPpm7zWO+U9zgAc6J3Fp6weBHiVrXXa3bHWl4oaac1j2EAPGGtJHPPXhUr1r6iCcjIglI7Q0q/s6bXtPa+Ubhb3wtcclfk8jpZXyvPtnuLj3yt52X65i0yyWir4nvo5Hb4LOJa7r4dfILSPU1R/h5fIKep6j/Dy+QVKsVorMRik5I6MOGCr39ljSnbXfYf8ANPZY0n/ervsP+aoRzXsOHtc09hGF+KsHRqkfH4/ktfZmq/4dquk5JAzpKtmTzdDgD71HbQ9FnV74L5Y6uF73xge2PtXt6iCqQyugtiUj5NBQF5J3ZpGjvAqBfoN0hrbVUnOcb781rkj6ocTVSepdPXXT1U2C5wdGXDLXA5a7vFRPUrw/SBjYdL0cpaN8VYaD3N1yo9dDpN112sJXjB5KRC7jbkoui9jn9nFq/wB9/Geue6Siq6uVsVNTySvccANbnK6T2d2yez6Nt1uqRuzRtcXDs3nudj/zKq6VyM7Mxmd+LPyK1WsBoCn0RFwSgoiIiLxP7y/6J8yjFJz+8v8AonzKMREREREWXbvjPB6ViLLt3xng9KIstEREREREREX45wa0ucQAOJJRF+oq81ltQttomfSW2MV1S04cc4Y099aJVbWdUyPJgdTQtzwHRB2PGtzYHuGVaQaPambxAYHmr+wOxFz37KusP8VS/wCXansq6w/xVL/l2rLsz1J/09a8R8fyXQiLnv2VdYf4ql/y7V+t2ravByamlI7PU7U7M9P9PW/EfH8l0GmAqXsW2GtZM1l3oWSxE+2ki4OHg5K1tP3u3X2hbV26obIw8x1tPYQtb4nM5qBb06xV3kbt49yksDsTA7EUDrzUA01p2W5dH0km8GRtPIuOcZ8SwAJOAokUbpXhjeZTXNqtty07VtuEUZDIi5shHFhHIgrmFbRqPXmor7TPpaurDKd/OOJu6COw45rVlZQRlgwV3Wk0ZakZbIc5+S6I2Jf2eUX7yX8ZUL+kP8Hrb9bP4CprYn/Z5RfvJfxlQv6RHwdtv1s/gKjM/iPeuei/5Y/3H7qm7VFFPdKSCY4ikmYx57GlwBXU1moKK3W+GnoYY44WsGN0Yz3VygDjktpptfaop7aLfHcXdEG7ocRl4HcdzU2xA6XHCVcarQltBvAcYWdtd1BWXDVdTRtqXGkpXBkbGu9qeGSe/wAfuW37Br/VVbKu01lQ6RsLWvh3zkgHOQO5wVNyPfJI6SRxc5xy4nmSsq0XKttNcytoJ3wzMPBzT9x7ilOrB8PVheT0WurdSO76rrDA7EwOxVFs62k3O4X2C1XgRSNqCGRyMaGkO6lbqpJ4HwO4XLlLFZ9d3C9c67Vr1X1usa6mkqJBBSymKNgPAYPPCsDYVfai4Wuqt9ZUGV9M5vRb5yd05z4BwVW7Rc/r1efrb/Oo6yXavs1cKy3VDoZgMZHIjsPaF1LqbZ6gjbscDCupKwkrho8AultZ1dTQaWuFXRA+qI4ssxzzkBc3UV3ukV2ZXxVc5qukB3945ccq0dnG0Kuvd2bZb1HFL6oaWse1oGTjkR3srb6fQGloLkK+O3N6UO3g0nLAe43koNaZumcUU7ck+Heq1hFXLJBup+0yyz2qknnGJZIGPeOxxaCVTX6QUsb9R0DGOBdHTEOA6jvErK13tNulNeai3WYRwwwOMZe5gJcRwPe4qsrlX1VyrJKytnfNNIcuc45KmaNpcscosP2GNh6r2vWc13GVObNLXTXjWVFQ1bd+Elz3NPI7rS7H3LpGnghp4mxQRtjjaMBrRgBc+7Fv7QqH6Ev4HLoZROkj3dpa3O2PuVpuZ4wEwOxMDsVMaq2qXeG9zU9qZDHTQv3PbsDi/HPvKydB6gGpNPR3Ex9HJvFkjRyDhjl41XWdLsVoRNINj/m60vhexvEVqG3ay0PrAy7sgYyqjmawvaMFwd2+JUmr+26fAN/1mP0qgmDeeGjmThdl0be51L2jyJ+ym1d415XQmxOJ8WgqcSNLS6aRwz1gngo7S2yyyw0EE12bJU1RaHPG8Q0Hsx1qw6WnhpadlPTxNiijaGsY0YAHYqbXdYhtR9RFvg8/RaLEzXjhC0Db5FJJpCBzGlwjq2udjqG64elUnZ6V1ddKWka0u6WVrSB2Z4/cuqK+jpq+kkpKuJssMgw5jhkFQdi0TpyzV3q2iocTj3Lnu3t3vZ5LDS9djp1DE5p4t8e9IrAYzBUtZbXRWmgipKKBkTGNA9qMZPaVmoi5pz3PJc45KiE5RERYoiIiIvE/vL/onzKMUnP7y/6J8yjERERERFl274zwelYiy7d8Z4PSiLLREREREREVYbbdWS26BtjoJCyaduZnNPFrezwqz1zNtLrH1muLq97smKpfCO8xxaPMt9dgc7dXGiVmz2Mu5N3WuZ45U5pzSd8v7s0FE8xZ4yu4NCzNmemTqXULIJcilgHSTHtHZ48Lo6ipaejpmU1LEyKKMYa1owApM0/BsOavtU1bsh6uMZd9FSMex7ULmgmutzD2Fz/5V69hzUHzjbfKf/KrtqKinp271RPFC3te8NH3rH9d7T86UX+Yb+ajdokVINbvHcfRU17DmoPnG2+U/wDlUdd9l2pqCEyxsgrAOJELjn78K+YrlbpXhkVwpJHHkGzNJ86yl72h45rIa9cYfax8FyNUQy08zoZ43RyNOC1wwQpvQ+o6rTd6jq4XOMLiBNHng5qtrbHpGmuNnlvFJC1lbTNLnlox0jRzz3VQ/IqUx4kaunqWYtRrnI8iF1tQ1MNZRxVUDw+KVoc1w6wVG6xsMGo7HLbJ3lm8Q5jx+y4cj96hdjNW+r0JS77s9C90Q7wwtyJABJIAHWVAOWO27lwkrXVbBDTu0/RUfJsbvu+ejuVvLereL8/hX7T7G710zenuVAI8+2LC4nHcy1XRBWUk7yyCqglcObWSAkeJfdbe0yKwOu3RsSPgo7Tdpp7HZqe2U2THC3GT1nrPhK0L9If4PW362fwFWctI2yWGsvumoxQsMk1LL0ojHNwxg48axhd+sBKjafNi4ySQ9+5XPSc1nPs13Y4tda63I4H+gd+S/BaLr811v2DvyV41w8V3LpGeKwkCzfWi7Z/qut+wd+SetF1+a637B35KQxw8VHc9vivlbquagroaynduywvD2HsIV1ae2tWmq6GnuVPNSyuwHSYBjB8efuVNG0XX5srfsHfksm36dvdbVR08Nrq99xAG9EWjxlezV4Jx+sPJVtuvBOMvPJWvrjZq7UF0fd7RXQRmo9u9smd0ntBAK132HdQfONt8p/8AKrbsbIrLYaGgrauFkkMLWFz5AN4jvqVjeyRgexzXNPEFpyCqdmp2IRwtOw5bLnhemYOEHYKtdC7PG6YrTerxWwyPp2ks6PO63ukkBSdLtQ01PdRQh07Wudutnc0bh9P3LY9X2+a6aZr7fTu3ZZosNOevIPoXPFHpLUE12ZQi2VDJd/BJbho4888lNpxxagHyWX7j3YCzia2zl8p3Vj612Xy3S5zXOzVcDGznpHRyE4yeJIIB581VF8tVdZrjJQV8JimZ1dRHaF1Ja6d1LbKWle7edDCyMntIaBlU1+kI1rdQ29wABdSkk9vtipmialNJOK7zkY2Povathzn8B3Chti39oVD9CX+G5dDLmXZ7eIbHq2juNRnomEseewOG7nwZXRNPfbNUQtljulGWuGRmZo+4laOkkMhsNeBtj7la7zDxg4Vc6n2TS1t5lq7bXQxQzO3nMlzlpPPGAVv+jrDBpyxxW2B5fukue8/tOPM/csv13tPznRfbt/NPXe0/OdF9u381WWLtyxEIpMkDyUd8kjxwlajt0+Ab/rMfpVCU3+sR/THnVv7btTWypssdmo6llRM+USPMZyGgcuPhVPxO3JGv/ukFdn0dhfHSw4YySVPqNIj3XW0fvbe8Fr+r9X2jTLWCue98r+LYoxlxHbx4LzYdYWO4WaKtdcIITuAyMe7DmnrGPyVH7Tb3BftWVFZSvL6doEcZ7QOvwrmNK0d1myWTNIa3n+ChwwF78OCsr2YrB83XLyWfzKW0ztHsF9r20UYnpZn8GCcAbx7Bglc8gFxAAJJ5ALatB6XvNx1BRvZRzwwxyB75XtLQAOPXzXQW9A0+KFziS3A55Up9WINJ5Lo9F8JKyjjmEMlVAyQ8mOkAd4l91wRBHNViIiLxERERF4n95f8ARPmUYpOf3l/0T5lGIiIiIiLLt3xng9KxFl274zwelEWWiIiIiIiIuWtb/DO+f941H8Ry6lXLWt/hnfP+8aj+I5SqvMrpOjf71/orO/R2iZ633SfA3xK1me5jKsm/XGK02epuE3uYIy7HaeoeNV1+jt/U11+sM/Ctm2wEjZ5cyDjhH+NqwkGZcKLfjEupljuRIH0VEan1Jc7/AF8lTWVMm44+0iDsNaOoYUMiKaABsF3ccTY2hrRgL6QzSwvD4ZXxuHJzHEH7ldexfWFVdmyWa4yGSeFu9FIebm9YPeVILethhP6/wDPAwS/hWuVoc0qv1iuyWo8uG4GQr+q4mz0skLwC17SCCuS6kYqZQOp58664d7k95ckVf+tS/Td51qq96pujB/ej0+6vvYR8A2/WpPQvvtpuNTbtFPfSyOjfNO2FzmnBAIcTx8C+Gwj4Bt+tSehfLb78B4/rsf4XrDnN71Xlodq2D/Mqa0xd6u132lrIaiRhEo3/AGxwQTxz2rqSnmjngZNE4OY9oc0g8CCuRVsNp1pqe1UraahusscTeDWlrXY8YKlTQGTBCvtX0p1wtdGQCPFdOIub/ZH1n88u+xj/AJVZ+yHWVbqRlRRXINdU07d/pGjG83OOPd4qK+s9jeIrnLWjWK0ZkcQQPBWCiIo6qERERERERFzhtUudZWa1uMUs7zHTzGKNm9wAB7Fv+wS9S1Vuq7ZVVBe6FzXQh7sndOc+Dkqz2i/Dq8/W3+dRVsuFbbKptVQ1D4Jm8nNP/vK7J1MWKgjG2wwunkriWsGDbYLrFFzgNo2sgMevL/sWfyrMtG07VFPXRyVlaKuEOG+x8bRkeABVR6P2cZBHz/BVDtNlA5hdBqmP0hoJDdrbU7h6LoCzexwzvE4Vw2+obWUFPVsGGzxNkA7jgD6V8bva7fdqU01xpY6iLscOXePUoOn2hTsiRwzhRYJOqk4iuUcL9XRvsc6N+Zm/bSfzJ7HOjfmZv20n8y6sdJ6v8rvl+KsO3x+BXOSLo32OdG/MzftpP5k9jnRvzM37aT+ZZjpTU/ld8vxWPbo/ArnJFZm1rQtvsdAy7WoOih3wySIkkDPIjPHtVaRtL5GsHNxwr2lcitxCWPkpMcgkbxBfiK+dNbMNPwWuL10pTWVLmgvcXuaAewYIUp7HOjfmZv20n8yppOlFNji0Bx9w/FRjcjBVYbErLFctSvqaqASw0sZcN4Zbv5GPuyr0rS6K3zmBoD2xOLAB144L4Wa0W6z03qe20sdPHzIbzPfJ4rOXJapqPbbHWgbDkFBml6x+Vypc624TXWaoqZ5vVPSuJJcctOeQ7F0bs9qKyq0ZbZ7hveqHRneLuZAcQ0+IBftXpDTlXcPV89qhdUZ3t7iAT3QDhTkbGxsaxjQ1rRgADAAUzV9XivQsjYzBH+YHktk87ZGgAL9REXPqKiIiIvE/vL/onzKMUnP7y/6J8yjERERERFl274zwelYiy7d8Z4PSiLLREREREREXLWt/hnfP+8aj+I5dSrlrW/w0vn/eNR/EcpNbmV03Rn96/wBFaX6O39TXX6wz8K2ja5G+XZ9c2MBJ3WHHee0rT/0d6pghulFn+kLmy47gGPSrVrqWGto5qSdu9FKwscO4VhIcSZUPUn9TqZkPcQfouSEW96u2bXy2Vsj7fTPraRziWGIZcB2EBa7+q2pfmG5f5Z35KWHtIzldtFdrytDmvGPVQy3zYXG52vIngEtZBJk9mQoKj0bqeqmETLLWsJ65InMHjIV07L9FjTFG+eqc2SvnA3yOTB2BYSvaG4VdrF+COs5gcCXDGAt0d7k95ckVf+tS/Td511fdqplDbairkIDIYy9x7AAuT53B08jhyLifvWFXvVb0Xaf1h9Pur82EfANv1qT0L5bffgPH9dj/AAvX12EfANv1qT0L5bffgPH9dj/C9YD9971Xj/l//ZUIiKUtGn7zdd00FtqZmOOBI2M7vj5KxyBzXbPe1gy44CmNEaFumqY31FO+OnpmHdMsgzk9wK5tnmjKfSdNLif1RVTcHyYwMdg7i96Oo6XSGkqSjudXT07hlz3SPDRvOOSMnsys/wDWrTXz9bf8y381AllfISByXEahfsWnOYz9jPcOamUWFbrtbLiXCguFNVFvPopA7HiWaoxBHNUjmlpwQiidVagoNOWw11e47ucMY3m49gWZcblQW6MSV9ZBTMPIyvDc+NUnto1VQ32ppaG3S9LDTEudIOTnHHAdvJSalczSAEbKbRqGxKAR7PerC0ftFtGorj6gZDLSzu97EhyH+FbouYtnLi3XVm3SRmrYD3srp1bdQrMgeAzkQtmp1WV5AGciFXOvNmbL9dJLnQVjaaaXjI17ctce1VBqrT9fpy5mhr2jexlj28nDtC6lVNfpFNAuFncAMmKXJ8LVY6ReldK2FxyFt0+3I54icchVSiIuwardwXVWlvgxavqUP4ApFRulvgxavqUP4As2qqaekhdNUzRwxN5ve7AHhXzSUEyEDxXJu/aK+qKH/WnTXz9bf8w381H33XOnLdbpZ47pTVMgadyOGQPJPVyWbKk73BoYcnyXojeTgBReotp9ltF1fQCCaqdGd2R8ZwGn0rbrFdaO9WyK4UMm/DIOHaD2FcsVsxqKuaodnMjy7j3Sr02BuJ0VLkk4rHgeS1dFq2jQVKgkZniGM+amWKzY4+Ic1t+pbPTX6zzW2ryI5RwcObT1EKv7DslhobvHWV1xbUU8Tt5sbW4zjtVpEgAknAHMrAgulsrnyUtLcKaabBBYyQEjwBUlW9agjcyJxDTz/wA7lFZK9oIbyWoXnalY7bdX0DYJqgRu3XysPtQR51udouNLdbdDX0UgkglbvNK5/wBQaD1HS3qWnhoJ6qNzzuTMaS0jPMnqV1bO7NUWHStNb6twMwy94Bzuk9SstVpUYKzHwPy4+ec+fkt08cTWAsO62FF+Pc1jC97g1oGSTyCiX6n04xxa++W5rhzBqG/mqFkT3/sglRQCeSl0UVBqSwTytihvVBI9xwGtnaSfvUqOIyj43s/aGEII5oiIsF4iIiIvE/vL/onzKMUnP7y/6J8yjERERERFl274zwelYiy7d8Z4PSiLLREREREREXN21i3vt+uLgHD2s8hnae3eO96V0itI2r6Q/WS2NqaQD1fTAln/AG29bVuhfwu3VxolxtWz7fI7KktHX6p07fIbhActBxKzqe3rC6O01qG2agom1NvqGv4e3jz7Zh7CFy7VU81LUPgqInRSsJDmuGCCvdFWVVFKJaWokheORY7CkSRB+66rUtIjvgPBw7xXWqLmRmt9WMbusvtYAOreH5L1+vWrvn+s8ofktPZ3eKov9MWP5x8/wXTK/JHtjYXvcGtaMknkAuZ/161d8/1nlD8lg3LUd9uLNyuulTO3sc5BXPism9GJs+08Y96sXa/rumq6V9is8wkY44qJmnII/uhVKi3bZhoup1Bco6yqicy2xOy9xHvh/uhSWhsbV0UccGl1uew+ZVt7J6B9v0PRRyDDpR0pHZvYURt9+A8f12P8L1YEbGxxtYwANaMABaBt8BOh48DlWx/heocZzICuLpSmbUGyHvdlURSbhqoRL73vt3u9niuq7JHRRWmmFA1gpuib0ZbyLccFyflStHqK+UlEaKmudRFTkYMbXcFOmhMmMFdVq2mvuhvC7GFsW2W8uuWsJ4IagvpqYCNoDuAdgb335WkL9c5znFziSTxJPWtu2VaZg1LqB0NXvepqdnSSNb+1xwB41IbwxM37lIxHSrb8mhYezmW4M1hb2290m+ZQHhvWz9r7srppRVl07ZbMd6226GncRguaOJUqqyzMJXAgLitTvNuSBzW4AXOm2GvqarXNfTyyuMVO4RxtzwAwD6VpwW0bVgRtCu+RzlH4GrV+tdFVAETceAXV1WgV2Y8B9FM6JqYqPV9qqp3hkUVUxz3HqAK6iY4PaHNOQRkLkUFbHYdbajtLomwXGV8EZH9FJxbjsWu9RdZw5p3CrdSoOskOadwumFTf6Rf+vWb91L52q17DXi6WakuAZuCoiEm72ZVU/pFA+rbOccOjl87VXaQC260Hz+hVHp4LbIB8/oqnREHE4XdMXQuXVWlvgzavqUP4Aq0/SEkrmutzGOe2jLTvY5F+T6FZel+GmbWD/g4fwBZNwoaO4U5p62njniPNrxkLgKtoVbfWkZwSuWjkEcvEQuTF+q3Nr2iLTbrGbxaacUxieBJG33JBOPSqjC+g0bsdyLrI1dxStlbxNX6r32B/Aub66/8AC1UOr42BgjRUuRjNY/8AC1V/SQ/7L3hRb37pZ+2WtqKLQ076eRzHSSsicQeO6c5VDWauqqG609XTzPZIyQEEHnxV47dAToN+Bn/SY/SqFpQTUxADJLx51r6NsaaLsjmT9AsaQHVFdaMOWA9xfq/I/cN7wVVbYdaXa03Zlptcxpt2MPkkHujnlhcdSpSXZuqj5qtjjMjuELYNtElfHoyQ0ReGmQCct6mcfThc+EknJOVdeyHVddqJ1VaLyRVFke+17hzbkAg9vNSOt9n1hqrLVVFDRMpKqNhka6PkccTkd7K6fT7zdJeadhu+eY81NikEB6t4VCMc5jg5ri0jkQV0lsurJ7hoO2VVS8vlc17S49YbI5o+4Bc2EYOF0XsdBGzi1AjHv38Z6l9KgOyMPfxfYrO8PYHqtuREXAqrREREXif3l/0T5lGKTn95f9E+ZRiIiIiIiy7d8Z4PSsRZdu+M8HpRFloiIiIiIiIiIi17U+jbFqH21dS7s3VLHwd41pFVsXpnvJpr8+FueAdS7/374VsIs2yObyKnwanbrjhjeQPj9VUPsKf7Tf8AA/8AUT2FP9pv+B/6it5Fl1z/ABUj9O3/APs+Q/BVD7Cn+03/AAP/AFF+t2KAEb2pcjs9Q4//ACK3UTrn+Kfp2/8A9nyH4KvrFsnsFDI2Wtllr3tOcObusPfGSt9paeGlgbBTxNijYMNa0YAX0RYOcXc1AsW5rJzK4lFHajs9HfrTLba1pMUnWObT1EKRReA43C0se5jg5pwQqik2KMLyY9Rlrc8AaLOPD0i/PYU/2m/4H/qK3kW3tEnirP8ATl7/ALPkPwVQ+wp/tL/wP/UW86F0fQ6UpZGU8rqieX3yZzd3PcAycDwrZUXj55HjBK0z6nasM4JH5HoB9AiIi1KAtI11s6oNTVormVjqGqIw94i3w7wZHFax7Cn+0v8AwP8A1FbyKVHcnjHC123uU6PUrMbQxr9h5BVCNin+0v8AwP8A1FkW/YzSw1TJKu+PqYmnJjbS7hPh3z5layLZ+krOMcXyH4L06naIwX/IfgvlSU8VLTR00DAyKNoa1o6goXWulaHVNvbTVTnRSRnMcrRkt8HWFPoojJHxvD2nBUNr3MdxA7qojsVGeGpeH1H/AKiy7TsdpKatjnrL0+rjY4Extpujz4d8+ZWkinnV7hGOP5D8FIN+wRgu+i8wxshiZFG0NYxoa0DqA5L0iKtURYt3t9NdLdNQVjN+GZu64elVhU7F4XzOdBqB0UZPtWuo94gd/fCtlFMq6hYqAiF2M+h+q2xzyR/slVJHsXYHgv1GXN6wKLGfDvqytOWajsNpit1E0iNnEk83HtKkUWVrUrNpobM/I9w+iSTySDDisG/2qkvVrmt1a0uhlGDjmD2haNYdk9tt12ZW1FxfVxxu3mQmHdGe6d458SsdFhBfsV2GON+Aea8ZK9gIaUHAYWo680JQaqkjqH1DqSqYN3pWs3gR2EZHnW3ItVexJXeJIjgrFj3MOWrWNCaModKQydDM6pqJeD5nN3eHYBk48a2aRjZI3MeMtcCCO0L9RJp5J5DJIcko5xcclVpcdkVsqbq6qhuUsFO9+86Dot7nzAdvDHiVhWqhp7ZboaCkZuQwt3WhZKLbYv2LLQyV+QOSyfK94w4oiIoi1oiIiLxP7y/6J8yjFJz+8v8AonzKMREREREWXbvjPB6ViLLt3xng9KIstERERCQASSABzJXiomip6eSeZ4ZFG0ve48gAMkqrqWG47R56i5XKumtul4HkRQMcGmbd5uceXfJzjkOsrNjOLc8lJgr9YC5xw0cz9h4lWA/UenmSmJ9+tbZAcFhq4wc97Kko3skjbJG9r2OGWuacghVTJFsXheaV74XOHAua+pcCe3eHDxFfGdjtBy0WotN3GWu0xWShtRTufvBmeseI4PPIwc5WwxA8s+9TOwNfsziBPLiGAfIHxVo3G72m2vYy43Sio3vGWtnnbGXDtGSMrF/WnTH/ANx2f/Ox/msDU2kbHq51JXVz6hwZF/ROhk3QWu455KpdYaTtVr2iWuxUvqj1JVGHpN9+Xe2eQcHHYkbGO2zuvaVOtY9kuIcASdvBXbS6hsFVUMp6W+WyeaQ4ZHHVsc5x7AAcleq2/WOhqHU1bebdTTtxvRzVTGOGeWQTla7Zdmum7Rdae5Unq3p6d++zfmBGe6MLRdW26lu+3FlurWOfTzmNr2tcQSOizzHeXjWMcdivIKlaeQhjjwhpJ232VvUN7stfN0NDd7fVSf3Ialj3eIFZ6qHaLs4tFn09UXqzS1NPLS7rzG6TeaRkDgeYPHPNbpspu9VedE0lVWyOlqGOdE+R3N+6eBPdxheOYOHiaVrsVIxAJ4XZbnByMEFSjtT6aa4tdqG0NcDgg1seQfGvVPqPT1ROyCnv1rmlkcGsYyrjc5xPUADxKpnZhpq06k1JeILrC+VkOXsDZC3BLyOpWXbdnGlbfcIK6lpJ2zwSCSMmdxAIORwysnsY04JK3W6lSs4xuc7ix4DH1WyXG6W22hhuNxpKMSZ3DPM2PexzxkjKymua5oc0hzSMgg8CFU36Rf8Aq1m+nL5mrY9d6wj0zpulgpcS3Wqga2njHHc4Ab5HmHWfCsRFkDHetI09z4onR7l+fktp9eLT64et3rpQ+rc7vqf1Q3pM4zjdznkvT7ra2XEW51yo21p5U5naJTwz7nOeXFahsr0a+y07rzdwZbzVgueXnJhaeJGf7x6z4O/rF0/+oSm+mz+CvRG0uIB5BZspQySvYx2Q1pOfEj7K4XOa1pc4hrQMkk8AFHwX+xTwzTQXq2yxQAOleyqYWxg8AXEHgO+tB2m6irLzc26H03mWomduVkrTwaOtmewDi4+DtC2zTujrRatLOsL4G1MU7f8AS3O4GZ3WTjiB2DqXhjDWgu71pdVZFE18pwXch5eP4LM/WnTP/wBx2f8Azsf5rNq7lbqSkZV1dfS09M/G5LLM1rHZGRhxODkKkdN6cs1VtcrrHPR79vgfNuQ9I7hu8uOcnxrc9u0UcGhKaGJgZHHVRtY0cgA1wAW0wN42sB5qRLRibPHE1x9rB7uRW/UNbR19OKihq4KqEkgSQyB7cjmMjgv2sqqWip3VNZUw00DMb0krwxrc8OJPBUxsvutTpLU7LFc34ormyOWF54NDnNBY4Z6jndPdA7Fv22L+zu5f7v8AiNR1fhlDM7HvWial1dhsech2MHyK2qkqaasp2VNJURVED/cyRPDmu7xHAr6SPZGwvkc1jWjJc44AC1PZTIyLZxbZZHBrGRvc4nqAe7KryI3nanqmeE1clJZqV29uji1jckN4ci88eJ5ce8smVeJ7snDW8ysG1MveCcNbzKtsak06ZOjF/tW/y3fVkefFlSjHNewPY4OaRkEHIIVfnZFpYxbnTXLexjf6Zue/7nH3LZtF6cpdL2f1upZXzAyukdI8YLieXiGAsJWQBuY3EnzC1SthAyxxJ9FkVOotP0076eovlshmjO6+OSrY1zT2EE5C+lFe7NXSiKiu9vqZDyZDUsefECqft9kt+oNsV6oLnG+SDfmfhry05BGOI76kdpWz6w2XTc94tstRTTQObhjpN5r8uAxx4g8c81O7DXD2xueQ5wHdtutxrxghpJycfNW8vlV1NNR076mrqIqeFnupJXhrW98ngFrWyivrLloahqK6R8kw32dI85Lw1xAJPXw8y1zblXyzx2zTFJxnrpmvcB2Z3WjwuOf/AAqNDSL7XUE8icn05laGxEycCsW319DcITNb62mq4g7dL4JWvaD2ZB5r7TSRwxPllkbHGxpc57jgNA5knqCqnZQ+TTmt7xpCpeXNcd+Fx6y0ZB8LSD4FYurPgvdfqcv4ClmoIZxGDkHGD5FeSR8L8dy+f60aZ/8AuK0f52P81IUVZSVsPTUdVBUxct+KQPb4wqZ2R6PsmpLLWz3SGV8sU/RscyUtwN0Hvda+dzt8uzzaJbm2qsnfSVRYXMeRlzC7dcx2OB7QcKxfpVcyvgjeeNviNj381tMDeItB3VyXG8Wm3SNjuF0oaN7xvNbPUNjJHaASvFDfLJXVAp6K8W+qmIJEcNSx7iBz4A5Ws7YLLbKzSlbdamlD62khHQS7zgW5cOoHB5nmorYZZLWNPx3z1KDcTLJH0xcchvLAGcDxKK2pAaRsFxyDjGBjPP4LWGN6vjVloiKqWlRlTqLT9NO+nqL5bIZozuvjkq2Nc09hBOQvpRXuzV0oiorvb6mQ8mQ1LHnxAqn7fZLfqDbFeqC5xvkg35n4a8tOQRjiO+pHaVs9sNl03PeLbLUU00DmYY6Tea/LgMceIPHPNdAdMqNkZC6Rwc4A8gRv78qT1TMhpO5VvLxNLFBE6WaRkUbRlz3uAAHdJWrbLbnU1mgaOtuUrnvjD2ulkPFzWuIBJPPgOfcVeUMVz2pasqTU1clNaKQ5DGHIY0khoA5bxwck/kFEh0suklEjuFsfM8+/Gw81g2HJOTsFbkWotPzTCGK+2uSQnAY2rjLie9lSaryp2RaafTlkFRcIpce1kMjXce6N3j9yhtmt3umndZTaKu9QZod4sp3OOdxwGW7ueTXDq7cd1bDp9eaNz6shJaMkEYOPEL3q2uBLDyVuIiKmWheJ/eX/AET5lGKTn95f9E+ZRiIiIiIiy7d8Z4PSsRZdu+M8HpRFloiIi1Pa7PJT7Prm6PIL2sjOB1OeAfuWl64kkoNkenLdTPMUVYIhM5pxkFu8Qe+TnwKydZWk3zTFfa2kCSeIiMnkHji37wFoGk6mz6n0k3RGpHOornRHo2NkIY/Lc7pbnmQOBHYpERw0HwKuqDwIWuxnhdk+mMA+4qX1xYbDZNmddHTW6jY6Onaxkpib0jnEgb29jJKhroYYP0fKZkpaDJGwMHa4y582VMUezl56KK/6nr7tbqcZipH5YwY5b3tjnA73i4LGsmzygqJYmv1TPd7NRzkxULXAsY8HO65wcR18QAOfVlehzQNznfK2xzwNaOKQu4XcWcHfy9fXZbpo6OWLSdpjnz0jaOIOzzzuhVltI/tmsPfpv4hVxAADA4BU7tH/ALZrD36b+IVhCcuJWjSncdl7vFrlcSo3XE9ypttPT2emZU17OjMMTxlrj0XXxHVnrV5Knbp/9QtN9Nn8FIDgn0TRjwySHGfYd9lHalvmsNRXWl0jfhRWQVT2lw3HBrhn2uTl2eI4AEDOMq4dM2alsFkprVR5McLeLnc3uPEuPfK1ra/pg33T/q2kYfXCgBki3eb2/tN9I7o7q+uyfVX6yafEdTIDcKPEc4zxeP2X+Hr7oK9eeJgIWdp/aKbXxABrT7QHj3H3qrdA2O7XzUF1itN8ntD4iXPfE5zS8F54HdIVkaY0dqe2Xymra/WVZX00RJfTvkkIfkEci4jnxVb6B1ZSaT1BdqirpZ6hs5LGiLGQQ8njlWDZdq9pul2pbdFbK1j6mVsTXOLcAk4yeK2y9YTsNlY6my6Xu6tuWY8B4b781EfpF/6tZvpy+Zq1mZt90zqmz6p1PSsqmVBDwM73RgDAb2BzRggd7rytm/SM/wBWs305fM1b5e7FS6i0g211QA34GGN+OMbw3g4f++WV414axueRytMNttenCHjLXcQPjjPcpihqqeto4ayllbLBMwPje3k4HkVSGv23R+2N7LKcXB4jZAcgbpMWM5PLAJKmtkt7q7De59EX3MT2yH1KXHgH8y0HsdzH/NfC6f8A1CU302fwUjb1bz6LXTrmnZkHMcBI8CNsLG2aVJ0brqrsV/hiZUVe7Gyq4n2xOW4cf2XZ59oGVda0Xa9pI6gs4rqGPNyowXMDecrOZZ3+sf8ANYugNf01Ro2oqLw+Q1dqjHqgNGXysyA14HWeo93vrGQda0Pbz71Gtt7bGLMY9rYOHn3H0KgdI/28XX6dQtg2+/AqL64z8LlX1h1fbKHabWalmhq/UdQ6Uta1jTIN7lkb2PvW+bcZ46rZ/SVURJjmqYpGZGDgscQpJYRMwnyUueJ7bsBcNsAe8LH1bpk37ZhaK+mYXXChoY5GY5vZuDeb3T1jvd1R9Tqc6l2M3Fk7964UYiZUZ5uG+3df4QOPdBVkaK+B9n+pRfgCpratYqjS99qZ6AbltuzCC0D2rTkOczxgOH/Je1iJH9W7mDkfHcKPUeJpOpdza7LfjuFv2kBI7Ypuw56Q0FQG455y9Rf6O7ovWa6sGOlFQwu+ju8PStm2Tta/Z1bGPALXRvBB6xvuWhVNs1Hs21LUXK0UUldZpvdNALm7mc7r8cWkdTuX3hZNAk62HOCTt8Vq2kM0OcEnI891tGvTtFgulVV2CriitUUIfgthJGG5d7ppPavvsav931BZa2ou9X6pliqNxjujazDd0HHtQFr1y2t0tdap6KKxVXqmoifEW9KCGlwI54yefYFLbB6CtodPVwraOopTJUhzBNGWFw3RxGeYWcsLmVD1rACMY5ZKwlicyuesaARjHLK00Wq43ja3eaO2XWW11HSzP6eNzgcAjI9qQeOVnaw0Rqegt3rpX3o6gpqT+kkp6maXg3rIG948EFYI1FTaY2t3q51UEs8fSyx7seM5JHb3lKan2kzaktc9jsFkq3S1bejc4+2cAeYDW559uVaYtiSMxgcOBk7e/fmtzhNxN4R7OAt/2b3ulvulaeopaRlGIP6B8DPcsLQOXcwQVWMWo7PWbXZr5eKzoaCkLm0xMbn5LRutwGg445cthoqap0DslrX1j+iuNW47rGuyWPeA0DI6wASvGyjQ9nrdKsuN6t8dVNVSF8W+5w3YxwHIjmQT4lGibXriaYk8JPCMc9+eM/VRQI2cb+47BQGvtTWV+t7VqXT9d6oki3RUNET2H2p/7QGctJHgVuainjqtG3CphdvRS0Ej2HtBYSFqevNn9hGlK6az2tlPWwM6WN0ZcS4N4luCTzGVi7P7z657J7lSSv3p6CmmhOee5uEsPiyPAvJhDYrxyw59ghpzjODy5fBYPDXsa5nccLUNmt31jbLRWfq5Z6aupul35nyMLi1waOAw8dXcUxs+op9d6ofqW/V8MjqB7Q2kY3BGOLeHU3OeskkHKl/0evg7cfrY/AFF6wgqNAa9g1HbmH1trnETRN4Nyfds/wDUO73lYTSiS1NBGA2QjY9523HvC2PdmRzAMFb3tU/s/u/7kfjaovYb8AovrEnnCxNrOrbQ3SjrdG6aeS6UrZad8bQWbu8DkkkY5HqKwNhupbeLfFpksqBWl8kodujoyOeM5znHcVcyrN+iXeyf2s+4DcrQGO6g7d6tRERc8oqokWq43ja3eaO13WW11HSzP6eNzgcAjI9qQeKzdYaJ1PQW43SvvJ1BTUn9JJT1M0vBvWQN7x4IKwhqGn0xtbvNzqoJZ4+llj3Y8ZySO3vKU1PtJm1Ja57HYbJVulq29G5x9s4A8wGtzz7crvHduEsRiaODhbknHhvvz+Csj1nE3hG2Att09eae/wCzCrmoaNtIYqSWnNPH7ljms5N7mCD4VA/o7uZ613ZgI6QTsJHXjdOPStl2VacqdPaV9TXBoFTUyGaWPOQzIADe/gce+tHq7VqLZ1qioutmoX19onJ3mMaSAzOd12MlpHU7l4yFVMEM3aakLh7RBbk88Hln6LSOF3Gxp9FcyprVxEm3a3NhOXtlpw7d5g4yc+BZ8m2AzRiGg05PJWO4Bjpd4A94Nye9wX32Z6VvEuoZ9X6ljdFVSFzoYXjD953AuI/ZAHAA8e9gZxp1ZNMbJNZ9nLSAMjJJ9O5eMYYgXP22VnoiLmlEXif3l/0T5lGKTn95f9E+ZRiIiIiIiy7d8Z4PSsRZdu+M8HpRFloiIiKA1Ro7T+o3dJcqEGoAwJ43FkgHfHPw5U+i9BIOQs45XxO4mHB8lXrNkemg4b9bd5GD4t07N37mZW46fslssFB6htVP0EG8Xlu+5xLjzOSSepSKL1z3O5lbprk8w4ZHkhERFioyIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiL4V5qhQzmhbE6qEbuhEudwvxwzjjjK+6L0HByi0n1RtR/wADpjypf5lnWObXrrpE29UtiZQ8eldTGTpBwOMZcRzwtoRTHXA5pHVtHu/NbDJkcgiIihLWiIiIiIiIiIiIvE/vL/onzKMUnP7y/wCifMoxERERERZdu+M8HpWIsu3fGeD0oiy0REREREREREREREREREREREREREREREREREREREREREReJ5WQQvmlduxxtLnHGcADJWp+yXon56/4Wb+RbbNGyaJ8UjQ5j2lrgesHmtF1honStHpW6VdLZoIpoqWR8bw52WkA4PNSIBE44kz7sKVWbA48MucnljH3Wb7Jeifnr/hZv5FsNiu9uvlAK+11HqimLi0P3HN4jnwcAVV2xnS9gvWmaiqultiqZm1TmB7i4EN3WnHA90q07Pa6Cz0QorbTNpqcOLgxpJGTz5rZajgiJYzOR44wtlyKvC4sZnI8cYWYiIoagoiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiLxP7y/6J8yjFJz+8v8AonzKMREREREWXbvjPB6ViLLt3xng9KIstERERERERERERERERERERERERERERERERERERERERERERQmvfgVefqcn4SptQ+tYZqjSN2ggifLLJSSNYxjS5ziWnAAHMrZF+2PVbYf3jfULUf0fvgfVfXXfgYrGWhbDqCut2lamG4UVTSSmsc4MnicxxG63jgjkt9W24QZ3EeK3XyDZeR4oiIoyiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiLxP7y/6J8yjFJz+8v8AonzKMREREREWVbz7Z7e0ArFXqJ5jeHDqRFKIvEUrJG5aePWOsL2iIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiISAMkgBEXzqDiB5PZhRqyKucSHcb7kdfasdEREREREREQcDkL10snyj/GvKIi99LL8o/yinSy/KP8AKK8IiL30svyj/KKdLL8o/wAorwiIvfSy/KP8op0svyj/ACivCIi99LL8o/yinSy/KP8AKK8IiL30svyj/KKdLL8o/wAorwiIvfSy/KP8op0svyj/ACivCIi99LL8o/yinSy/KP8AKK8IiL30svyj/KKdLL8o/wAorwiIvfSy/KP8op0svyj/ACivCIi99LL8o/yinSy/KP8AKK8IiL30svyj/KKdLL8o/wAorwiIvfSy/KP8op0svyj/ACivCIi99LL8o/yinSy/KP8AKK8IiL30svyj/KKdLL8o/wAorwiIvfSy/KP8op0svyj/ACivCIi99LL8o/yinSy/KP8AKK8IiL30svyj/KKdLL8o/wAorwiIvfSy/KP8op0svyj/ACivCIi99LL8o/yinSy/KP8AKK8IiL30svyj/KKdLL8o/wAorwiIvfSy/KP8op0svyj/ACivCIi99LL8o/yinSy/KP8AKK8IiL30svyj/KK8uc53unE98r8REREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREX//2Q=="
+            id="qrTelegram"
+            alt="QR @TREKKINGBARI_BOT"
+            style="width:150px;height:150px;display:block;border-radius:4px;"
+          >
+          <div id="qrFallback" style="display:flex;width:150px;height:150px;align-items:center;justify-content:center;flex-direction:column;gap:.5rem;background:#f5f5f5;border-radius:4px;">
+            <span style="font-size:2.5rem;">✈️</span>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-size:.65rem;color:#333;text-align:center;letter-spacing:.05em;">@TREKKINGBARI_BOT</span>
+          </div>
+        </div>
+        <a href="https://t.me/TREKKINGBARI_BOT" target="_blank" class="btn-s" style="font-size:.8rem;padding:.85rem 1.8rem;text-decoration:none;width:100%;text-align:center;display:block;">
+          ✈️ &nbsp;Abrir en Telegram
+        </a>
+        <p style="font-family:'Barlow Condensed',sans-serif;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,221,209,.25);">@TREKKINGBARI_BOT</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Responsive: una columna en mobile -->
+  <style>
+    @media(max-width:640px){
+      #chatbot .jhon-grid{grid-template-columns:1fr!important;}
+    }
+  </style>
+
+</section>
+
+<footer>
+  <p>
+    Bariloche Trekking · Parque Nacional Nahuel Huapi · Patagonia Argentina<br>
+    Con el apoyo de <a href="https://nahuelhuapi.gov.ar/" target="_blank">Parques Nacionales</a> · <a href="http://www.clubandino.org/" target="_blank">Club Andino Bariloche</a> · <a href="https://www.barilocheturismo.gob.ar/" target="_blank">EMPROTUR</a> · <a href="http://www.aagm.com.ar/" target="_blank">AAGM</a><br>
+    Sitio de referencia: <a href="https://barilochetrekking.com" target="_blank">barilochetrekking.com</a>
+  </p>
+</footer>
+
+<!-- Botón flotante Jhon -->
+<div class="chat-prompt" onclick="openJhon()">💬 ¿Dudas sobre el equipo o clima? Pregúntale a Jhon</div>
+
+<!-- Scripts Botpress -->
+
+<script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2026/03/28/19/20260328194041-DAFCNX3F.js" defer></script>
+    
+
+<script>
+// NAV scroll
+window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',scrollY>60));
+
+// Activity tabs
+function switchAct(t,btn){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  ['senderos','cortas','travesias'].forEach(id=>{
+    const el=document.getElementById('act-'+id);
+    if(el) el.style.display=id===t?'block':'none';
+  });
+}
+
+// Difficulty tabs
+function switchDiff(l,btn){
+  document.querySelectorAll('.dtab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.dcontent').forEach(c=>c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('diff-'+l).classList.add('active');
+}
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+  });
+});
+
+// Botpress - abrir chat de Jhon
+function openJhon(){
+  if(window.botpressWebChat){
+    window.botpressWebChat.sendEvent({ type: 'show' });
+  }
+}
+</script>
+</body>
+</html>
