@@ -1,2 +1,3 @@
 # Landing-Bot-Trekking
-Landing page realizada mediante prompting donde se agrego un bot cargado con un notebook de información de barilochetrekking.com para responder todas las dudas sobre el trekking en Bariloche Argentina.
+
+## Landing page con información de barilochetrekking.com realizada con técnicas de prompt engineering. La misma cuenta con un bot de botpress el cual puede responder técnicamente sobre la información de la web de manera mas rápida.
